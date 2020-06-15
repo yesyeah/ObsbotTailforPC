@@ -1,0 +1,566 @@
+#include "cameracontrol.h"
+#include <sstream>
+
+size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
+    std::string data((const char*) ptr, (size_t) size * nmemb);
+    *((stringstream*) stream) << data << std::endl;
+    return size * nmemb;
+}
+
+
+CameraControl::CameraControl()
+{
+    curlHandle = curl_easy_init();
+}
+
+
+void CameraControl::init(){
+    cameraIP = GetCameraIP();
+
+    cameraConctrlAddr = "http://"+cameraIP+":80/";
+    aiConctrlAddr = "http://"+cameraIP+":27729/";
+    currentZoomSpeed = 100;
+    wifiSSID = "";
+    wifiPassword = "";
+
+    aiInit();
+    cameraInit();
+    return;
+}
+
+bool CameraControl::aiInit(){
+    if (curlHandle == nullptr){
+        std::cout<<"ai init failed,  curl failed!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPGET, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<< "debug ai init response : "<<response.str()<<std::endl;
+
+    json recv_msg = response.str();
+    if (recv_msg["aisdk"]){
+        isAIOn = recv_msg["aisdk"];
+        isTracking = recv_msg["tracking"];
+        isHandposeCtl = recv_msg["handpose"];
+        speedMode = recv_msg["speedMode"];
+        xOffset = recv_msg["xoffset"];
+        yOffset = recv_msg["yoffset"];
+        isAIReady = recv_msg["ready"];
+        isDefaultLandscape = recv_msg["defaultView"];
+        isAutoZoom = recv_msg["autozoom"];
+        targetType = recv_msg["targetType"];
+    } else {
+        std::cout<<"AI is off"<<std::endl;
+    }
+    return true;
+}
+
+bool CameraControl::cameraInit(){
+    if (curlHandle == nullptr){
+        std::cout<<"camera init failed,  curl failed!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPGET, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+    std::cout<< "debug ai init response : "<<response.str()<<std::endl;
+
+    json recv_msg = response.str();
+    currentZoom = recv_msg["Zoom"];
+
+    return true;
+}
+
+bool CameraControl::paramUpdate(){
+    return aiInit() && cameraInit();
+}
+
+
+bool CameraControl::WifiStatusGet(){
+    if (curlHandle == nullptr){
+        std::cout<<"wifi status get failed,  curl is nullptr!";
+        return false;
+    }
+
+    std::string url = cameraConctrlAddr;
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["msg_id"] = CommandId::WIFI_MSG;
+
+    std::string request_data = send_msg.dump();
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"wifi status get result : "<<response.str()<<std::endl;
+    return true;
+}
+
+bool CameraControl::WifiStatusSet(bool is_ap_mode){
+    if (curlHandle == nullptr){
+        std::cout<<"wifi status set failed,  curl is nullptr!";
+        return false;
+    }
+
+    std::string url = cameraConctrlAddr;
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["msg_id"] = CommandId::WIFI_CFG;
+    if (is_ap_mode){
+        send_msg["mode"] = WifiMode::WIFI_AP;
+    } else {
+        send_msg["mode"] = WifiMode::WIFI_STATION;
+        send_msg["ssid"] = wifiSSID;
+        send_msg["passwd"] = wifiPassword;
+    }
+
+    std::string request_data = send_msg.dump();
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"wifi status set result : "<<response.str()<<std::endl;
+
+    return true;
+}
+
+bool CameraControl::WifiInfoSet(std::string ssid, std::string pwd){
+    wifiSSID = ssid;
+    wifiPassword = pwd;
+    return true;
+}
+
+bool CameraControl::DeviceSearch(){
+    //ap mode get wifi via get connected wifi info
+
+
+    //station mode get via device search
+
+    return true;
+}
+
+
+std::string CameraControl::GetCameraIP(){
+    //mdns scan device, then get device ip through app
+    return cameraIP;
+}
+
+bool CameraControl::SetCameraIP(std::string ip_addr){
+    cameraIP = ip_addr;
+    return true;
+}
+
+bool CameraControl::CameraDirectionSet(int x, int y){
+    if (curlHandle == nullptr){
+        std::cout<<"ai init failed,  curl failed!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    std::cout<< "debug ai init response : "<<response.str()<<std::endl;
+
+    json send_msg;
+    send_msg["cmd"] = "setRelDegree";
+    send_msg["rollDegree"] = -10000;
+    send_msg["pitchDegree"] = y;
+    send_msg["yawDegree"] = x;
+
+    std::string request_data = send_msg.dump();
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, request_data.c_str());
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"camera direction set result : "<<response.str()<<std::endl;
+
+    return true;
+
+}
+
+
+GimbalLocation CameraControl::CameraDirectionGet(){
+    GimbalLocation location;
+    location.xOffset = xOffset;
+    location.yOffset = yOffset;
+    return location;
+}
+
+bool CameraControl::GimbalLocationReset(){
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal reset failed,  curl is nullptr!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["cmd"] = "reset";
+
+    std::string request_data = send_msg.dump();
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"gimbal reset  result : "<<response.str()<<std::endl;
+
+    return true;
+}
+
+
+bool CameraControl::GimbalLock(bool is_lock){
+    //post msg via http
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal lock failed,  curl is nullptr!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["cmd"] = "lock";
+    if (is_lock){
+        send_msg["mode"] = GimbalLockStatus::LOCK;
+    } else {
+        send_msg["mode"] = GimbalLockStatus::UNLOCK;
+    }
+
+    std::string request_data = send_msg.dump();
+
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"camera lock set result : "<<response.str()<<std::endl;
+
+    return true;
+}
+
+std::vector<GimbalPresetLocation> CameraControl::GimbalPresetLocationGet(){
+    std::vector<GimbalPresetLocation> locations;
+    locations.clear();
+
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal preset location get  failed,  curl failed!";
+        return locations;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json recv_msg;
+    json send_msg;
+    send_msg["cmd"] = "presetQuery";
+
+    std::string request_data = send_msg.dump();
+
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    recv_msg = response.str();
+
+    std::cout<<"gimbal preset location get result : "<<response.str()<<std::endl;
+
+
+    for(unsigned int i = 0; i < recv_msg.size(); i++){
+        GimbalPresetLocation location;
+        location.zoom = recv_msg[i]["ratio"];
+        location.id = recv_msg[i]["id"];
+        location.roll = recv_msg[i]["roll"];
+        location.yaw = recv_msg[i]["pan"];
+        location.pitch = recv_msg[i]["pitch"];
+        locations.insert(locations.begin()+i, location);
+    }
+
+    return locations;
+}
+
+bool CameraControl::GimbalPresetLocationAdd(float zoom, float roll, float pitch, float yaw){
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal preset location add  failed,  curl failed!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["cmd"] = "presetAdd";
+    send_msg["id"] = presetLocationId+1;
+    send_msg["roll"] = roll;
+    send_msg["pitch"] = pitch;
+    send_msg["pan"] = yaw;
+    send_msg["ratio"] = zoom;
+
+    std::string request_data = send_msg.dump();
+
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+
+    std::cout<<"gimbal preset location add result : "<<response.str()<<std::endl;
+    return true;
+}
+
+bool CameraControl::GimbalPresetLocationRemove(int id){
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal preset location remove  failed,  curl failed!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["cmd"] = "presetRemove";
+    send_msg["id"] = id;
+
+    std::string request_data = send_msg.dump();
+
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+
+    std::cout<<"gimbal preset location remove result : "<<response.str()<<std::endl;
+    return true;
+}
+
+bool CameraControl::GimbalPresetLocationTigger(int id){
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal preset location trigger  failed,  curl failed!";
+        return false;
+    }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["cmd"] = "presetTrigger";
+    send_msg["id"] = id;
+
+    std::string request_data = send_msg.dump();
+
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, &request_data);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"gimbal preset location trigger result : "<<response.str()<<std::endl;
+    return true;
+}
+
+bool CameraControl::AIHandposeSet(bool onoff){
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal preset location trigger  failed,  curl failed!";
+        return false;
+    }
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+
+    json sendmsg;
+    sendmsg["cmd"] = "SdkSetConfig";
+    sendmsg["key"] = AICfgKey::AI_CFG_HANDPOSE;
+    if (onoff){
+        sendmsg["val"] = HandPoseStatus::HP_ON;
+    }else{
+        sendmsg["val"] = HandPoseStatus::HP_OFF;
+    }
+
+    return true;
+}
+
+bool CameraControl::AIHandposeGet(){
+
+    return isHandposeCtl;
+}
+
+bool CameraControl::AITrackingSet(bool is_tracking){
+    //post msg via http
+    std::string url = aiConctrlAddr+"obsbot/tail/ai/gimbal";
+    json send_msg;
+    send_msg["cmd"] = "lock";
+    if (is_tracking) {
+        send_msg["mode"] = GimbalLockStatus::UNLOCK;
+    }else{
+        send_msg["mode"] = GimbalLockStatus::LOCK;
+    }
+
+    return true;
+}
+
+bool CameraControl::AITrackingGet(){
+    return isTracking;
+}
+
+bool CameraControl::AIDefaultViewSet(bool is_landscape){
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+
+    json sendmsg;
+    sendmsg["cmd"] = "SdkSetConfig";
+    sendmsg["key"] = AICfgKey::AI_CFG_DEFAULT_VIEW;
+    if (is_landscape){
+        sendmsg["val"] = DefaultView::LANDSCAPE;
+    }else{
+        sendmsg["val"] = DefaultView::PORTRIAT;
+    }
+    return true;
+}
+
+bool CameraControl::AIDefaultViewGet(){
+    return isDefaultLandscape;
+}
+
+bool CameraControl::CameraZoomSet(int pos, int speed){
+    std::string url  = cameraConctrlAddr;
+    json send_msg;
+    send_msg["msg_id"] = 802;
+    send_msg["pos"] = pos;
+    send_msg["speed"] = speed;
+    return true;
+}
+
+std::string  CameraControl::CameraZoomGet(){
+    return currentZoom;
+}
+
+bool CameraControl::CameraAutoZoomSet(bool on){
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+
+    json sendmsg;
+    sendmsg["cmd"] = "SdkSetConfig";
+    sendmsg["key"] = AICfgKey::AI_CFG_AUTOZOOM;
+    if (on){
+        sendmsg["val"] = AutoZoom::AZ_ON;
+    }else{
+        sendmsg["val"] = AutoZoom::AZ_OFF;
+    }
+
+    return true;
+}
+
+bool CameraControl::CameraAutoZoomGet(){
+    return isAutoZoom;
+}
