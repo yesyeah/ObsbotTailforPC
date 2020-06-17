@@ -11,11 +11,12 @@
 #include <Sensapi.h>
 #include <iostream>
 using namespace std;
-extern size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream);/* {
+
+extern size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
     std::string data((const char*) ptr, (size_t) size * nmemb);
     *((stringstream*) stream) << data << std::endl;
     return size * nmemb;
-}*/
+}
 
 CameraControl::CameraControl(){
     curl_global_init(CURL_GLOBAL_ALL);
@@ -100,6 +101,7 @@ void CameraControl::init(){
     presetLocationId = 0;
 
     pingHandle = std::make_shared<CPing>();
+
     cameraConctrlAddr = "http://"+cameraIP+":80";
     aiConctrlAddr = "http://"+cameraIP+":27739";
     currentZoomSpeed = "100";
@@ -108,66 +110,107 @@ void CameraControl::init(){
 
     aiInit();
     cameraInit();
-    WifiInfoGet(cameraIP);
     return;
 }
 
 bool CameraControl::aiInit(){
+    /*curlHandle = curl_easy_init();
+
+    if (curlHandle == nullptr){
+        std::cout<<"ai init failed,  curl failed!";
+        return false;
+    }*/
+
     std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+
+    /*std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPGET, 1L);
+    //curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);*/
+
+   // std::cout<< "debug ai init response : "<<response.str()<<std::endl;
+
     std::string req;
     std::string res;
     httpHandle.getRequest(url, req, res);
 
-    if (res != ""){
-        json recv_msg = json::parse(res);
-        if (recv_msg["aisdk"] == 1){
-            std::cout<<"AI is on"<<std::endl;
+    json recv_msg = json::parse(res);
+    if (recv_msg["aisdk"] == 1){
+        std::cout<<"AI is on"<<std::endl;
 
-            isAIOn = recv_msg["aisdk"];
-            std::cout<<"ai status:" <<isAIOn<<std::endl;
+        isAIOn = recv_msg["aisdk"];
+        std::cout<<"ai status:" <<isAIOn<<std::endl;
 
-            isTracking = recv_msg["tracking"];
-            std::cout<<"tracking status:" <<isTracking<<std::endl;
+        isTracking = recv_msg["tracking"];
+        std::cout<<"tracking status:" <<isTracking<<std::endl;
 
-            // isGimbalLock = !recv_msg["tracking"];
-            // std::cout<<"gimbal status:" <<isGimbalLock<<std::endl;
+       // isGimbalLock = !recv_msg["tracking"];
+       // std::cout<<"gimbal status:" <<isGimbalLock<<std::endl;
 
-            isHandposeCtl = recv_msg["handpose"];
-            std::cout<<"hand pose ctl status:" <<isHandposeCtl<<std::endl;
+        isHandposeCtl = recv_msg["handpose"];
+        std::cout<<"hand pose ctl status:" <<isHandposeCtl<<std::endl;
 
-            speedMode = recv_msg["speedMode"];
-            std::cout<<"speedmode status:" <<speedMode<<std::endl;
+        speedMode = recv_msg["speedMode"];
+        std::cout<<"speedmode status:" <<speedMode<<std::endl;
 
-            isAIReady = recv_msg["ready"];
-            std::cout<<"ai ready status:" <<isAIReady<<std::endl;
+        isAIReady = recv_msg["ready"];
+        std::cout<<"ai ready status:" <<isAIReady<<std::endl;
 
-            isDefaultLandscape = recv_msg["defaultView"];
-            std::cout<<"default view status:" <<isDefaultLandscape<<std::endl;
+        isDefaultLandscape = recv_msg["defaultView"];
+        std::cout<<"default view status:" <<isDefaultLandscape<<std::endl;
 
-            isAutoZoom = recv_msg["autoZoom"];
-            std::cout<<"auto zoom status:" <<isAutoZoom<<std::endl;
+        isAutoZoom = recv_msg["autoZoom"];
+        std::cout<<"auto zoom status:" <<isAutoZoom<<std::endl;
 
-            targetType = recv_msg["targetType"];
-            std::cout<<"target type status:" <<targetType<<std::endl;
+        targetType = recv_msg["targetType"];
+        std::cout<<"target type status:" <<targetType<<std::endl;
 
-        } else {
-            std::cout<<"AI is off"<<std::endl;
-        }
+    } else {
+        std::cout<<"AI is off"<<std::endl;
     }
 
+   // head_list = nullptr;
     return true;
 }
 
 bool CameraControl::cameraInit(){
-    std::string url = aiConctrlAddr + "/obsbot/tail/ai/camera";
-    std::string req;
-    std::string res;
-    httpHandle.getRequest(url, req, res);
-
-    if (res != ""){
-        json recv_msg = json::parse(res);;
-        currentZoom = recv_msg["Zoom"];
+    curlHandle = curl_easy_init();
+    if (curlHandle == nullptr){
+        std::cout<<"camera init failed,  curl failed!";
+        return false;
     }
+
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/camera";
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPGET, 1L);
+    //curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+    //std::cout<<"camera init start 1"<<std::endl;
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+   // std::cout<<"camera init start 2"<<std::endl;
+
+   // std::cout<< "debug camera init response : "<<response.str()<<std::endl;
+
+    json recv_msg = json::parse(response.str());;
+    currentZoom = recv_msg["Zoom"];
 
     return true;
 }
@@ -177,27 +220,60 @@ bool CameraControl::paramUpdate(){
 }
 
 bool CameraControl::WifiStatusGet(){
-    std::string url = cameraConctrlAddr;
-    std::string res;
-    json send_msg;
-    send_msg["msg_id"] = CommandId::WIFI_MSG;
-    httpHandle.postRequest(url, send_msg.dump(), res);
+    curlHandle = curl_easy_init();
 
-    json response_msg = json::parse(res);
-    if (response_msg["mode"] == 0){
-        std::cout<<"get wifi ssid:"<<response_msg["ssid"]<<std::endl;
-        std::cout<<"get wifi mac:"<<response_msg["mac_addr"]<<std::endl;
-    }else {
-        std::cout<<"current wifi is ap mode ."<<std::endl;
+    if (curlHandle == nullptr){
+        std::cout<<"wifi status get failed,  curl is nullptr!";
+        return false;
     }
 
-    std::cout<<"wifi status get result : "<<res<<std::endl;
+    std::string url = cameraConctrlAddr;
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
+    json send_msg;
+    send_msg["msg_id"] = CommandId::WIFI_MSG;
+
+    std::string request_data = send_msg.dump();
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS,request_data.c_str());
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"wifi status get result : "<<response.str()<<std::endl;
     return true;
 }
 
 bool CameraControl::WifiStatusSet(bool is_ap_mode){
+    curlHandle = curl_easy_init();
+
+    if (curlHandle == nullptr){
+        std::cout<<"wifi status set failed,  curl is nullptr!";
+        return false;
+    }
+
     std::string url = cameraConctrlAddr;
-    std::string res;
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
     json send_msg;
     send_msg["msg_id"] = CommandId::WIFI_CFG;
     if (is_ap_mode){
@@ -208,8 +284,13 @@ bool CameraControl::WifiStatusSet(bool is_ap_mode){
         send_msg["passwd"] = wifiPassword;
     }
 
-    httpHandle.postRequest(url, send_msg.dump(), res);
-    std::cout<<"wifi status set result : "<<res<<std::endl;
+    std::string request_data = send_msg.dump();
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS,request_data.c_str());
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"wifi status set result : "<<response.str()<<std::endl;
 
     return true;
 }
@@ -221,25 +302,48 @@ bool CameraControl::WifiInfoSet(std::string ssid, std::string pwd){
 }
 
 std::string CameraControl::WifiInfoGet(std::string ip){
+    curlHandle = curl_easy_init();
+    if (curlHandle == nullptr){
+        std::cout<<"wifi status get failed,  curl is nullptr!";
+        return "";
+    }
+
     std::string url = "http://"+ip+":80";
     std::cout<<"get "<< url <<" wifi msg"<<std::endl;
-    std::string res;
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYPEER, false); // if want to use https
+    curl_easy_setopt(curlHandle, CURLOPT_SSL_VERIFYHOST, false);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
 
     json send_msg;
     send_msg["msg_id"] = CommandId::WIFI_MSG;
-    httpHandle.postRequest(url, send_msg.dump(), res);
 
-    if (res != ""){
-        json response_msg = json::parse(res);
-        if (response_msg["mode"] == 0){
-            std::cout<<"get wifi ssid:"<<response_msg["ssid"]<<std::endl;
-            std::cout<<"get wifi mac:"<<response_msg["mac_addr"]<<std::endl;
-        }else {
-            std::cout<<"current wifi is ap mode ."<<std::endl;
-        }
+    std::string request_data = send_msg.dump();
+    std::cout<<"wifi get cmd "<<request_data<<std::endl;
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS, request_data.c_str());
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    json response_msg = json::parse(request_data.c_str());
+    if (response_msg["mode"] == 0){
+        std::cout<<"get wifi ssid:"<<response_msg["ssid"]<<std::endl;
+        std::cout<<"get wifi mac:"<<response_msg["mac_addr"]<<std::endl;
+    }else {
+        std::cout<<"current wifi is ap mode ."<<std::endl;
     }
-    std::cout<<"wifi status get result : "<<res<<std::endl;
-    return res;
+
+    std::cout<<"wifi status get result : "<<response.str()<<std::endl;
+    return response.str();
 }
 
 bool CameraControl::DeviceSearch(){
@@ -249,12 +353,12 @@ bool CameraControl::DeviceSearch(){
 
     for (int i = 0; i < 127; i++){
         std::string testIP = preIP + std::to_string(128-i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 50)){
+        if (pingHandle->Ping(testIP.c_str(), &reply, 100)){
             WifiInfoGet(testIP);
             std::cout<<testIP<<" is on"<<std::endl;
         }
         testIP = preIP + std::to_string(128+i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 50)){
+        if (pingHandle->Ping(testIP.c_str(), &reply, 100)){
             WifiInfoGet(testIP);
             std::cout<<testIP<<" is on"<<std::endl;
         }
@@ -355,13 +459,36 @@ std::shared_ptr<GimbalLocation> CameraControl::CameraDirectionGet(){
 }
 
 bool CameraControl::GimbalLocationReset(){
+    curlHandle = curl_easy_init();
+
+    if (curlHandle == nullptr){
+        std::cout<<"gimbal reset failed,  curl is nullptr!";
+        return false;
+    }
+
     std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
-    std::string res;
+
+    std::stringstream response;
+    curl_slist* head_list = nullptr;
+    curl_slist_append(head_list, "Content-Type:application/json");
+
+    curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curlHandle, CURLOPT_POST, 1L);
+    curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
+    curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &response);
+
     json send_msg;
     send_msg["cmd"] = "reset";
-    httpHandle.postRequest(url, send_msg.dump(), res);
 
-    std::cout<<"gimbal reset  result : "<<res<<std::endl;
+    std::string request_data = send_msg.dump();
+    curl_easy_setopt(curlHandle, CURLOPT_POSTFIELDS,request_data.c_str());
+
+    curl_easy_perform(curlHandle);
+    curl_easy_cleanup(curlHandle);
+
+    std::cout<<"gimbal reset  result : "<<response.str()<<std::endl;
 
     return true;
 }

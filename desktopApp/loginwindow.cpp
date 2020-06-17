@@ -23,7 +23,8 @@ void loginWindow::setCommandHandle(std::shared_ptr<CameraControl> camera){
 
 void loginWindow::on_deviceSearchButton_clicked()
 {
-    MainWindow masterPage;
-    masterPage.show();
+    //MainWindow masterPage;
+    //masterPage.show();
+    handle->DeviceSearch();
 }
 

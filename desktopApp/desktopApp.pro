@@ -6,6 +6,7 @@ CONFIG += c++11
 LIBS += C:\Users\Kevin\Desktop\obsbotDestopAPP\desktopApp\curl-7.70.0-win64-mingw\lib\libcurl.dll.a
 LIBS += C:\Users\Kevin\Desktop\obsbotDestopAPP\desktopApp\openssl-1.1.1g-win64-mingw\lib\libcrypto.dll.a
 LIBS += C:\Users\Kevin\Desktop\obsbotDestopAPP\desktopApp\openssl-1.1.1g-win64-mingw\lib\libssl.dll.a
+LIBS += -lIphlpapi -lSensapi -lws2_32
 
 INCLUDEPATH +=  C:\Users\Kevin\Desktop\obsbotDestopAPP\desktopApp\curl-7.70.0-win64-mingw\include\
 INCLUDEPATH += C:\Users\Kevin\Desktop\obsbotDestopAPP\desktopApp\json\include\
@@ -22,12 +23,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    httpservice.cpp \
+    icmp_ping.cpp \
     cameracontrol.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    httpservice.h \
+    icmp_ping.h \
     cameracontrol.h \
     loginwindow.h \
     mainwindow.h \

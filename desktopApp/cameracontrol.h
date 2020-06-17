@@ -4,10 +4,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
 #include "curl/curl.h"
 #include "curl/easy.h"
 #include "utils.h"
+#include "icmp_ping.h"
+#include "httpservice.h"
+
 #include "nlohmann/json.hpp"
 
 using namespace std;
@@ -53,6 +55,7 @@ public:
     bool paramUpdate();
 
     bool WifiStatusGet();
+    std::string WifiInfoGet(std::string ip);
     bool WifiStatusSet(bool is_ap_mode);
     bool WifiInfoSet(std::string ssid, std::string pwd);
 
@@ -87,8 +90,11 @@ public:
 private:
     std::string GetCameraUrl();
     std::string GetAIUrl();
+    bool GetLocalIP();
 
     CURL* curlHandle;
+    HttpService httpHandle;
+    std::string localIP;
     std::string cameraIP;
     std::string curlHead;
 
@@ -123,6 +129,7 @@ private:
 
     std::string wifiSSID;
     std::string wifiPassword;
+    std::shared_ptr<CPing> pingHandle;
 
 };
 
