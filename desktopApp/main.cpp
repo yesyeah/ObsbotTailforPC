@@ -15,12 +15,5 @@ int main(int argc, char *argv[])
     loginWindow loginPage;
     loginPage.show();
     loginPage.setCommandHandle(handle);
-
-    std::cout<<"camera control handle init success"<<std::endl;
-    MainWindow masterPage;
-    masterPage.init();
-    masterPage.show();
-    masterPage.setCommandHandle(handle);
-
     return a.exec();
 }

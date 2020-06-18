@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "cameracontrol.h"
+#include "devicelistwindow.h"
 
 namespace Ui {
 class loginWindow;
@@ -27,6 +28,7 @@ private slots:
 private:
     Ui::loginWindow *ui;
     std::shared_ptr<CameraControl> handle;
+    devicelistwindow* devicelistWindow;
 
 };
 

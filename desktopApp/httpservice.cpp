@@ -8,17 +8,16 @@ using json = nlohmann::json;
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
     std::string data((const char*) ptr, (size_t) size * nmemb);
     *((stringstream*) stream) << data << std::endl;
-    std::cout<<"get write data function:"<<data<<std::endl;
-    std::cout <<"get write data size :"<<size*nmemb<<std::endl;
-
+    //std::cout<<"get write data function:"<<data<<std::endl;
+    //std::cout <<"get write data size :"<<size*nmemb<<std::endl;
     return size * nmemb;
 }
 
 size_t write_data_post(void *ptr, size_t size, size_t nmemb, void *fp) {
     std::string data((const char*) ptr, (size_t) size * nmemb);
     memcpy(fp, data.c_str(), size * nmemb);
-    std::cout<<"post write data function:"<<data<<std::endl;
-    std::cout <<"post write data size :"<<size*nmemb<<std::endl;
+    //std::cout<<"post write data function:"<<data<<std::endl;
+    //std::cout <<"post write data size :"<<size*nmemb<<std::endl;
     return size * nmemb;
 }
 
@@ -65,7 +64,7 @@ bool HttpService::postRequest(std::string url, std::string request, std::string 
 
     curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curlHandle, CURLOPT_HTTPPOST, 1L);
-    curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    //curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
     curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, head_list);
     curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data_post);
     curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, resp);
@@ -92,11 +91,11 @@ bool HttpService::getRequest(std::string url, std::string request, std::string &
     headers = curl_slist_append(headers, "Content-Type:application/json");
     curl_easy_setopt(curlHandle, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curlHandle, CURLOPT_HTTPGET, 1L);
-    curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
+    //curl_easy_setopt(curlHandle, CURLOPT_VERBOSE, 1);
     curl_easy_setopt(curlHandle, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, write_data);
     curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &resp);
-    curl_easy_setopt(curlHandle, CURLOPT_DEBUGFUNCTION, OnDebug);
+    //curl_easy_setopt(curlHandle, CURLOPT_DEBUGFUNCTION, OnDebug);
 
     curl_easy_perform(curlHandle);
     curl_easy_cleanup(curlHandle);

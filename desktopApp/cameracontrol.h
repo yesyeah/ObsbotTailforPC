@@ -55,11 +55,10 @@ public:
     bool paramUpdate();
 
     bool WifiStatusGet();
-    std::string WifiInfoGet(std::string ip);
     bool WifiStatusSet(bool is_ap_mode);
     bool WifiInfoSet(std::string ssid, std::string pwd);
 
-    bool DeviceSearch();
+    std::vector<std::string> DeviceSearch();
 
     bool CameraDirectionSet(int x, int y);  // 镜头方向控制
     std::shared_ptr<GimbalLocation> CameraDirectionGet();
@@ -85,17 +84,20 @@ public:
     bool CameraZoomTigger();
     bool SetCameraIP(std::string ip_addr);
     std::string GetCameraIP();
+    std::string GetCameraDefaultIP();
 
 
 private:
     std::string GetCameraUrl();
     std::string GetAIUrl();
     bool GetLocalIP();
+    bool isStatMode(std::string ip);
 
     CURL* curlHandle;
     HttpService httpHandle;
     std::string localIP;
     std::string cameraIP;
+    std::string cameraDefaultIP;
     std::string curlHead;
 
     std::string cameraConctrlAddr;

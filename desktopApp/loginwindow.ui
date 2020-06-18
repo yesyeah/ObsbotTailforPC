@@ -72,16 +72,16 @@
      <bool>false</bool>
     </property>
     <property name="currentText">
-     <string>热点模式</string>
+     <string>AP mode</string>
     </property>
     <item>
      <property name="text">
-      <string>热点模式</string>
+      <string>AP mode</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>station模式</string>
+      <string>Station mode</string>
      </property>
     </item>
    </widget>

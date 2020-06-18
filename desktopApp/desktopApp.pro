@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    devicelistwindow.cpp \
     httpservice.cpp \
     icmp_ping.cpp \
     cameracontrol.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    devicelistwindow.h \
     httpservice.h \
     icmp_ping.h \
     cameracontrol.h \
@@ -39,6 +41,7 @@ HEADERS += \
     utils.h
 
 FORMS += \
+    devicelistwindow.ui \
     loginwindow.ui \
     mainwindow.ui
 
