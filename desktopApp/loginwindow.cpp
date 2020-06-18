@@ -32,8 +32,7 @@ void loginWindow::on_deviceSearchButton_clicked()
 
         MainWindow* masterPage;
         masterPage = new MainWindow();
-        masterPage->init();
-        masterPage->setCommandHandle(handle);
+        masterPage->init(handle);
         masterPage->show();
         this->hide();
         std::cout<<"ap mode connected"<<std::endl;

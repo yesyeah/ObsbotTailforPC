@@ -26,8 +26,10 @@ CameraControl::CameraControl(){
     cameraDefaultIP = "192.168.0.1";
     presetLocationId = 0;
 
+    currentZoomPos = 0;
+    currentZoomSpeed = 0;
+
     pingHandle = std::make_shared<CPing>();
-    currentZoomSpeed = "100";
     wifiSSID = "";
     wifiPassword = "";
 }
@@ -159,16 +161,7 @@ bool CameraControl::aiInit(){
 }
 
 bool CameraControl::cameraInit(){
-    std::string url = aiConctrlAddr + "/obsbot/tail/ai/camera";
-    std::string req;
-    std::string res;
-    httpHandle.getRequest(url, req, res);
-
-    if (res != ""){
-        json recv_msg = json::parse(res);;
-        currentZoom = recv_msg["Zoom"];
-    }
-
+    CameraZoomGet();
     return true;
 }
 
@@ -284,16 +277,30 @@ bool CameraControl::SetCameraIP(std::string ip_addr){
 }
 
 bool CameraControl::CameraDirectionSet(int x, int y){
+    CameraDirectionGet();
+
     std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
     std::string res;
     json send_msg;
-    send_msg["cmd"] = "setRelDegree";
-    send_msg["rollDegree"] = -10000;
-    send_msg["pitchDegree"] = y;
-    send_msg["yawDegree"] = x;
+
+    int pitch = y + currentPitch;
+    int yaw = x + currentYaw;
+    std::cout<<"set yaw "<<yaw << " set pitch "<<pitch <<std::endl;
+
+    send_msg["cmd"] = "setAbsDegree";
+    send_msg["rollDegree"] = -1000;
+    if (y == 0){
+        send_msg["pitchDegree"] = -1000;
+        send_msg["yawDegree"] = yaw;
+    }
+    if (x == 0){
+        send_msg["pitchDegree"] = pitch;
+        send_msg["yawDegree"] = -1000;
+    }
 
     httpHandle.postRequest(url, send_msg.dump(), res);
     std::cout<<"camera direction set result : "<<res<<std::endl;
+
     return true;
 }
 
@@ -309,9 +316,9 @@ std::shared_ptr<GimbalLocation> CameraControl::CameraDirectionGet(){
     std::cout<<"camera direction get result : "<<res<<std::endl;
     json recv_msg = json::parse(res);
     currentRoll = recv_msg["Degree"][0];
-    currentYaw = recv_msg["Degree"][1];
-    currentPitch = recv_msg["Degree"][2];
-
+    currentPitch = recv_msg["Degree"][1];
+    currentYaw = recv_msg["Degree"][2];
+    std::cout<<"get yaw "<<currentYaw << " get pitch "<<currentPitch <<std::endl;
     location->roll = currentRoll;
     location->pitch = currentPitch;
     location->yaw = currentYaw;
@@ -344,8 +351,13 @@ bool CameraControl::GimbalLock(bool is_lock){
     }
 
     httpHandle.postRequest(url, send_msg.dump(), res);
+    isTracking = !is_lock;
     std::cout<<"camera lock set result : "<<res<<std::endl;
     return true;
+}
+
+bool CameraControl::GetGimbalLockStatus(){
+    return isTracking;
 }
 
 std::vector<GimbalPresetLocation> CameraControl::GimbalPresetLocationGet(){
@@ -432,20 +444,39 @@ bool CameraControl::AIHandposeSet(bool onoff){
     }
     httpHandle.postRequest(url, send_msg.dump(), res);
 
+    isHandposeCtl = onoff;
+
     std::cout<<"hand pose set result : "<<res<<std::endl;
+    paramUpdate();
 
     return true;
 }
 
 bool CameraControl::AIHandposeGet(){
+    paramUpdate();
     return isHandposeCtl;
 }
 
 bool CameraControl::AITrackingSet(bool is_tracking){
-    return GimbalLock(!is_tracking);
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+    std::string res;
+
+    json send_msg;
+    send_msg["cmd"] = "SdkSetConfig";
+    send_msg["key"] = AICfgKey::AI_CFG_GIMBAL_LOCK;
+    if (isTracking){
+        send_msg["val"] = 1;
+    } else {
+        send_msg["val"] = 0;
+    }
+    httpHandle.postRequest(url, send_msg.dump(), res);
+
+    paramUpdate();
+    return true;
 }
 
 bool CameraControl::AITrackingGet(){
+    paramUpdate();
     return isTracking;
 }
 
@@ -471,22 +502,59 @@ bool CameraControl::AIDefaultViewGet(){
     return isDefaultLandscape;
 }
 
-bool CameraControl::CameraZoomSet(int pos, int speed){
+bool CameraControl::CameraZoomSet(int pos){
+    CameraZoomGet();
     std::string url  = cameraConctrlAddr;
     std::string res;
     json send_msg;
     send_msg["msg_id"] = CommandId::ZOOM_CFG;
-    send_msg["pos"] = pos;
-    send_msg["speed"] = speed;
+    send_msg["pos"] = currentZoomPos+pos;
+    send_msg["speed"] = 5;
 
     httpHandle.postRequest(url, send_msg.dump(), res);
     std::cout<<"camera zoom  set result : "<<res<<std::endl;
 
+    currentZoomPos = currentZoomPos + pos;
     return true;
 }
 
-std::string  CameraControl::CameraZoomGet(){
-    return currentZoom;
+bool  CameraControl::CameraZoomGet(){
+    std::string url  = cameraConctrlAddr;
+    std::string res;
+    json send_msg;
+    send_msg["msg_id"] = CommandId::ZOOM_GET;
+
+    httpHandle.postRequest(url, send_msg.dump(), res);
+    if (res != ""){
+        json response = json::parse(res);
+        currentZoomPos = response["pos"];
+        currentZoomSpeed = response["speed"];
+        std::cout<<"camera zoom : "<<currentZoomPos <<" camera zoom speed :"<<currentZoomSpeed<<std::endl;
+    }
+
+    return true;
+}
+
+int CameraControl::GetCurrentZoom(){
+    return currentZoomPos;
+}
+
+int CameraControl::GetCurrentZoomSpeed(){
+    return currentZoomSpeed;
+}
+
+std::string CameraControl::GetAbsZoom(){
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai/camera";
+    std::string req;
+    std::string res;
+    httpHandle.getRequest(url, req, res);
+
+    if (res != ""){
+        json recv_msg = json::parse(res);
+        absZoom = recv_msg["Zoom"];
+    }
+
+    return absZoom;
 }
 
 bool CameraControl::CameraZoomTigger(){
@@ -518,6 +586,7 @@ bool CameraControl::CameraAutoZoomSet(bool on){
 
     httpHandle.postRequest(url, send_msg.dump(), res);
     std::cout<<"camera auto zoom  set result : "<<res<<std::endl;
+    isAutoZoom = on;
 
     return true;
 }

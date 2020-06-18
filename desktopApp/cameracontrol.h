@@ -63,7 +63,8 @@ public:
     bool CameraDirectionSet(int x, int y);  // 镜头方向控制
     std::shared_ptr<GimbalLocation> CameraDirectionGet();
     bool GimbalLocationReset();                                              //云台复位
-    bool GimbalLock(bool is_lock);                                              //云台锁定开关
+    bool GimbalLock(bool is_lock);
+    bool GetGimbalLockStatus();                      //云台锁定开关
 
     std::vector<GimbalPresetLocation> GimbalPresetLocationGet();   // 预置位设置
     int GimbalPresetLocationAdd(float zoom, float roll, float pitch, float yaw);
@@ -79,9 +80,13 @@ public:
 
     bool CameraAutoZoomSet(bool on);
     bool CameraAutoZoomGet();
-    bool CameraZoomSet(int pos, int speed);                                     //调焦，变焦（自动 手动）
-    std::string CameraZoomGet();
+    bool CameraZoomSet(int pos);                                     //调焦，变焦（自动 手动）
+    bool CameraZoomGet();
     bool CameraZoomTigger();
+    int GetCurrentZoom();
+    int GetCurrentZoomSpeed();
+    std::string GetAbsZoom();
+
     bool SetCameraIP(std::string ip_addr);
     std::string GetCameraIP();
     std::string GetCameraDefaultIP();
@@ -111,7 +116,6 @@ private:
 
     int isAutoTracking;
     int isTargetTracking;
-
     int isAIOn;
     int isTracking;
     int isHandposeCtl;
@@ -123,11 +127,14 @@ private:
     int isDefaultLandscape;
     int isAutoZoom;
     int targetType;
-    std::string currentZoom;
-    std::string currentZoomSpeed;
+    std::string absZoom;
+
     std::string versionNum;
 
     int presetLocationId;
+
+    int currentZoomPos;
+    int currentZoomSpeed;
 
     std::string wifiSSID;
     std::string wifiPassword;

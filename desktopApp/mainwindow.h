@@ -19,7 +19,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void init();
+    void init(std::shared_ptr<CameraControl> camera);
     void setCommandHandle(std::shared_ptr<CameraControl> camera);
 
     QStringListModel *Model;
@@ -29,9 +29,29 @@ private slots:
     void triggerPresetLocation(QModelIndex id);
     void on_gimbalResetButton_clicked();
 
-    void on_autoTrackingButton_clicked(bool checked);
-
     void on_zoomButton_clicked();
+
+    void on_gimbalUpButton_clicked();
+
+    void on_gimbalLeftButton_clicked();
+
+    void on_gimbalDownButton_clicked();
+
+    void on_gimbalRightButton_clicked();
+
+    void on_zoomAddButton_clicked();
+
+    void on_zoomReduceButton_clicked();
+
+    void on_autoTrackingButton_clicked();
+
+    void on_handPoseButton_clicked();
+
+    void on_autoZoomButton_clicked();
+
+    void on_uvcButton_clicked();
+
+    void on_objectTrackingButton_clicked();
 
 private:
     Ui::MainWindow *ui;
