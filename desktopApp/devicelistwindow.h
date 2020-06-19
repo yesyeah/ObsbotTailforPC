@@ -19,6 +19,7 @@ public:
 
     bool deviceListShow(std::vector<std::string> info_list);
 private:
+    void connectTodevice(QModelIndex id);
     Ui::devicelistwindow *ui;
 
     QStringListModel *Model;

@@ -89,7 +89,6 @@ void MainWindow::triggerPresetLocation(QModelIndex id){
     return ;
 }
 
-
 void MainWindow::on_gimbalResetButton_clicked()
 {
     handle->GimbalLocationReset();
@@ -181,12 +180,10 @@ void MainWindow::on_autoZoomButton_clicked()
     handle->CameraAutoZoomSet(!currentZoomStatus);
 }
 
-void MainWindow::on_uvcButton_clicked()
-{
+void MainWindow::on_uvcButton_clicked(){
 
 }
 
-void MainWindow::on_objectTrackingButton_clicked()
-{
+void MainWindow::on_objectTrackingButton_clicked(){
 
 }

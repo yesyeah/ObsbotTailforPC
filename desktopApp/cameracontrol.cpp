@@ -380,6 +380,7 @@ std::vector<GimbalPresetLocation> CameraControl::GimbalPresetLocationGet(){
         location.id = recv_msg[i]["id"];
         location.roll = recv_msg[i]["roll"];
         location.yaw = recv_msg[i]["pan"];
+
         location.pitch = recv_msg[i]["pitch"];
         locations.insert(locations.begin()+i, location);
     }

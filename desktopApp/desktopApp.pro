@@ -29,7 +29,8 @@ SOURCES += \
     cameracontrol.cpp \
     loginwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    remoservice.cpp
 
 HEADERS += \
     devicelistwindow.h \
@@ -38,6 +39,8 @@ HEADERS += \
     cameracontrol.h \
     loginwindow.h \
     mainwindow.h \
+    remoprotocolutils.h \
+    remoservice.h \
     utils.h
 
 FORMS += \

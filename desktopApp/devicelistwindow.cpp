@@ -30,4 +30,8 @@ bool devicelistwindow::deviceListShow(std::vector<std::string> info_list){
     return true;
 }
 
+void devicelistwindow::connectTodevice(QModelIndex id){
+
+}
+
 
