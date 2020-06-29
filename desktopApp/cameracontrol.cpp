@@ -262,7 +262,6 @@ std::vector<std::string> CameraControl::DeviceSearch(){
     return addr_list;
 }
 
-
 std::string CameraControl::GetCameraIP(){
     return cameraIP;
 }

@@ -46,7 +46,6 @@ void devicelistwindow::connectTodevice(QModelIndex id){
     masterPage->init(handle);
     masterPage->show();
     this->hide();
-
 }
 
 

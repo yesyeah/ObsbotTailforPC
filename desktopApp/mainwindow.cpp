@@ -36,7 +36,6 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
     } else {
         ui->autoTrackingButton->setText("关闭");
         std::cout<<"auto tracking is  off "<<std::endl;
-
     }
     if (handle->AIHandposeGet()){
         ui->handPoseButton->setText("打开");
