@@ -27,6 +27,8 @@ public:
 private slots:
     void on_presetLocationAddButton_clicked();
     void triggerPresetLocation(QModelIndex id);
+    void showPresetLocation();
+
     void on_gimbalResetButton_clicked();
 
     void on_zoomButton_clicked();
@@ -51,7 +53,7 @@ private slots:
 
     void on_uvcButton_clicked();
 
-    void on_objectTrackingButton_clicked();
+    void on_objectDefaultViewButton_clicked();
 
 private:
     Ui::MainWindow *ui;

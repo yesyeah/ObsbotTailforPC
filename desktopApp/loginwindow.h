@@ -27,6 +27,8 @@ private slots:
 
 private:
     Ui::loginWindow *ui;
+    MainWindow* masterPage;
+
     std::shared_ptr<CameraControl> handle;
     devicelistwindow* devicelistWindow;
 

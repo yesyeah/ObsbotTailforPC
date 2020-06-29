@@ -7,12 +7,22 @@ devicelistwindow::devicelistwindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ItemModel = new QStandardItemModel(this);
+    masterPage = new MainWindow();
+
+    //deviceListShow();
 }
 
 devicelistwindow::~devicelistwindow()
 {
     delete ui;
+    delete masterPage;
 }
+
+void devicelistwindow::setCommandHandle(std::shared_ptr<CameraControl> camera){
+    handle = camera;
+    return;
+}
+
 
 bool devicelistwindow::deviceListShow(std::vector<std::string> info_list){
     QStringList presetLocationList;
@@ -22,15 +32,20 @@ bool devicelistwindow::deviceListShow(std::vector<std::string> info_list){
         presetLocationList.append(device);
         QStandardItem *item = new QStandardItem(device);
         ItemModel->appendRow(item);
-
-        ui->deviceList->setModel(ItemModel);
-        ui->deviceList->setFixedWidth(311);
     }
-    connect(ui->deviceList, SIGNAL(clicked(QModelIndex)), this, SLOT(triggerPresetLocation(QModelIndex)));
+
+    ui->deviceList->setModel(ItemModel);
+    ui->deviceList->setFixedWidth(311);
+    connect(ui->deviceList, SIGNAL(clicked(QModelIndex)), this, SLOT(connectTodevice(QModelIndex)));
     return true;
 }
 
 void devicelistwindow::connectTodevice(QModelIndex id){
+    std::cout<<"set camera ip as "<<id.data().toString().toStdString()<<std::endl;
+    handle->SetCameraIP(id.data().toString().toStdString());
+    masterPage->init(handle);
+    masterPage->show();
+    this->hide();
 
 }
 

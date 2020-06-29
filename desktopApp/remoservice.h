@@ -1,11 +1,13 @@
 #ifndef REMO_SERVICE_H
 #define REMO_SERVICE_H
 #include <iostream>
+#include <winsock2.h>
 #include "remoprotocolutils.h"
 #pragma pack (4)
 
 #define REMO_PROCOTOL_ADDRESS "192.168.0.20"
 #define REMO_PROCOTOL_PORT 9999
+#define REMO_PACK_LEN  96
 
 struct RemoProcotolHead{
     unsigned short syncHead;   //0xAA
@@ -34,7 +36,14 @@ enum ReturnValue{
 class RemoService{
 public:
     RemoService();
-    ~RemoService() = default;
+    ~RemoService();
+
+    bool init();
+
+    bool communicateInit();
+
+    unsigned char* dataPack(char command, unsigned short description, char receiver);
+    bool dataUnPack(char* data, RemoProcotolHead* response);
 
     bool ExposureCurGet();
     bool ApertureCurGet();
@@ -63,8 +72,12 @@ public:
     bool ZoomSet();
     bool ZoomGet();
 
+    bool UsbModeSet();
+    bool UsbModeGet();
+
 private:
     int exposureType;
+    unsigned short packSeq;
 };
 
 #endif

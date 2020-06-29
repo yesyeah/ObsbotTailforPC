@@ -17,6 +17,7 @@ MainWindow::~MainWindow()
 void MainWindow::init(std::shared_ptr<CameraControl> camera){
     ItemModel = new QStandardItemModel(this);
     handle = camera;
+
     if (handle->CameraAutoZoomGet()){
         ui->zoomAddButton->setEnabled(false);
         ui->zoomReduceButton->setEnabled(false);
@@ -42,6 +43,18 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
     } else {
         ui->handPoseButton->setText("关闭");
     }
+
+    if (!handle->AIDefaultViewGet()){
+        //default view landscape
+        ui->objectDefaultViewButton->setText("横屏");
+        std::cout<<"default view  is  landscape "<<std::endl;
+
+    } else {
+        std::cout<<"default view is not landscape "<<std::endl;
+        ui->objectDefaultViewButton->setText("竖屏");
+    }
+
+   // showPresetLocation();
 }
 
 void MainWindow::setCommandHandle(std::shared_ptr<CameraControl> camera){
@@ -63,7 +76,7 @@ void MainWindow::on_presetLocationAddButton_clicked()
     zoom = zoom.substr(0, zoom.find("x"));
     std::cout<<"zoom:" << zoom<<std::endl;
 
-    int presetLocationId  = handle->GimbalPresetLocationAdd((float)atof(zoom.c_str()), location->roll, location->pitch, location->yaw);
+    handle->GimbalPresetLocationAdd((float)atof(zoom.c_str()), location->roll, location->pitch, location->yaw);
 
     std::string presetLocationItem = "ratio:" + zoom + "     " +
                                      "roll:" + std::to_string(location->roll) + "     " +
@@ -81,12 +94,46 @@ void MainWindow::on_presetLocationAddButton_clicked()
     ui->presetLocationValueList->setFixedWidth(311);
 
     connect(ui->presetLocationValueList, SIGNAL(clicked(QModelIndex)), this, SLOT(triggerPresetLocation(QModelIndex)));
+    //ui->presetLocationValueList->clicked.connect(triggerPresetLocation);
 }
 
 void MainWindow::triggerPresetLocation(QModelIndex id){
-    std::cout<<"trigger a location:"<<id.column()<<std::endl;
-    handle->GimbalPresetLocationTigger(id.column());
+    std::cout<<"trigger a location:"<<id.row()<<std::endl;
+    handle->GimbalPresetLocationTigger(id.row());
     return ;
+}
+
+void MainWindow::showPresetLocation(){
+    std::cout<<"show preset location:"<<std::endl;
+    if (handle == nullptr){
+        std::cout<< "camera ctl handle is null"<<std::endl;
+    }
+    std::vector<GimbalPresetLocation> locations = handle->GimbalPresetLocationGet();
+
+    for (unsigned long long i  = 0; i < locations.size(); i++){
+        std::cout<<"id:" << locations[i].id <<"roll:" << locations[i].roll <<" pitch:"<<locations[i].pitch <<" yaw:"<<locations[i].yaw<<std::endl;
+        std::string presetLocationItem = "ratio:" + std::to_string(locations[i].zoom) + "     " +
+                                         "roll:" + std::to_string( locations[i].roll) + "     " +
+                                         "pitch:" + std::to_string(locations[i].pitch) + "     " +
+                                         "yaw:" + std::to_string(locations[i].yaw) + "     ";
+
+        std::cout<<"presetLocationgItem:" << presetLocationItem<<std::endl;
+        QString presetLocationStr = QString::fromStdString(presetLocationItem);
+
+        QStringList presetLocationList;
+        presetLocationList.append(presetLocationStr);
+
+        QStandardItem *item = new QStandardItem(presetLocationStr);
+        ItemModel->appendRow(item);
+        delete item;
+
+    }
+
+    ui->presetLocationValueList->setModel(ItemModel);
+    ui->presetLocationValueList->setFixedWidth(311);
+
+    connect(ui->presetLocationValueList, SIGNAL(clicked(QModelIndex)), this, SLOT(triggerPresetLocation(QModelIndex)));
+    //ui->presetLocationValueList->clicked.connect(triggerPresetLocation);
 }
 
 void MainWindow::on_gimbalResetButton_clicked()
@@ -184,6 +231,16 @@ void MainWindow::on_uvcButton_clicked(){
 
 }
 
-void MainWindow::on_objectTrackingButton_clicked(){
+void MainWindow::on_objectDefaultViewButton_clicked(){
+    bool currentDefaultView = handle->AIDefaultViewGet();
+    if (!currentDefaultView){
+        //default view landscape
+        ui->objectDefaultViewButton->setText("横屏");
+        std::cout<<"default view  is  landscape "<<std::endl;
 
+    } else {
+        std::cout<<"default view is not landscape "<<std::endl;
+        ui->objectDefaultViewButton->setText("竖屏");
+    }
+    handle->AIDefaultViewSet(!currentDefaultView);
 }

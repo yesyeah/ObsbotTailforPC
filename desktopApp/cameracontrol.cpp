@@ -241,15 +241,15 @@ std::vector<std::string> CameraControl::DeviceSearch(){
     addr_list.clear();
 
     for (int i = 0; i < 127; i++){
-        testIP = preIP + std::to_string(128-i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 40)){
+        testIP = preIP + std::to_string(254-i);
+        if (pingHandle->Ping(testIP.c_str(), &reply, 30)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
             }
         }
-        testIP = preIP + std::to_string(128+i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 40)){
+        testIP = preIP + std::to_string(0+i);
+        if (pingHandle->Ping(testIP.c_str(), &reply, 30)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
@@ -370,19 +370,20 @@ std::vector<GimbalPresetLocation> CameraControl::GimbalPresetLocationGet(){
     send_msg["cmd"] = "presetQuery";
 
     httpHandle.postRequest(url, send_msg.dump(), res);
-
-    json recv_msg = json::parse(res);;
     std::cout<<"gimbal preset location get result : "<<res<<std::endl;
 
-    for(unsigned int i = 0; i < recv_msg.size(); i++){
-        GimbalPresetLocation location;
-        location.zoom = recv_msg[i]["ratio"];
-        location.id = recv_msg[i]["id"];
-        location.roll = recv_msg[i]["roll"];
-        location.yaw = recv_msg[i]["pan"];
+    if (res != ""){
+        json recv_msg = json::parse(res);
 
-        location.pitch = recv_msg[i]["pitch"];
-        locations.insert(locations.begin()+i, location);
+        for(unsigned int i = 0; i < recv_msg.size(); i++){
+            GimbalPresetLocation location;
+            location.zoom = recv_msg[i]["ratio"];
+            location.id = recv_msg[i]["id"];
+            location.roll = recv_msg[i]["roll"];
+            location.yaw = recv_msg[i]["pan"];
+            location.pitch = recv_msg[i]["pitch"];
+            locations.insert(locations.begin()+i, location);
+        }
     }
 
     return locations;
@@ -500,6 +501,7 @@ bool CameraControl::AIDefaultViewSet(bool is_landscape){
 }
 
 bool CameraControl::AIDefaultViewGet(){
+    paramUpdate();
     return isDefaultLandscape;
 }
 
