@@ -18,12 +18,9 @@ public:
     ~loginWindow();
 
     void setCommandHandle(std::shared_ptr<CameraControl> camera);
-
-
 private slots:
-    void on_deviceSearchButton_clicked();
 
-    void on_connectComboBox_activated(const QString &arg1);
+    void on_deviceSearchButton_clicked();
 
 private:
     Ui::loginWindow *ui;

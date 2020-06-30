@@ -23,7 +23,6 @@ void devicelistwindow::setCommandHandle(std::shared_ptr<CameraControl> camera){
     return;
 }
 
-
 bool devicelistwindow::deviceListShow(std::vector<std::string> info_list){
     QStringList presetLocationList;
 

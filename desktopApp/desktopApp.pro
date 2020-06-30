@@ -2,6 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+RC_ICONS = logo.ico
 CONFIG += c++11
 LIBS += C:\Users\Kevin\Desktop\obsbotDestopAPP\desktopApp\curl-7.70.0-win64-mingw\lib\libcurl.dll.a
 LIBS += C:\Users\Kevin\Desktop\obsbotDestopAPP\desktopApp\openssl-1.1.1g-win64-mingw\lib\libcrypto.dll.a
@@ -57,4 +58,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    ../../icon/主页.png

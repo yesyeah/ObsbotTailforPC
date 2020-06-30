@@ -32,7 +32,10 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../中电视讯/Windows工具研发/defaultlaunch.png</normaloff>../../中电视讯/Windows工具研发/defaultlaunch.png</iconset>
+    <normaloff>icon/defaultlaunch.png</normaloff>icon/defaultlaunch.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(30, 30, 30);</string>
   </property>
   <property name="iconSize">
    <size>
@@ -67,7 +70,11 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="autoFillBackground">
-       <bool>true</bool>
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
@@ -85,6 +92,22 @@
        </item>
        <item>
         <widget class="QFrame" name="PresetArea">
+         <property name="minimumSize">
+          <size>
+           <width>330</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>330</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -101,6 +124,10 @@
                 <family>仿宋</family>
                 <pointsize>12</pointsize>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
               </property>
               <property name="text">
                <string>预置位</string>
@@ -127,6 +154,10 @@
                 <family>仿宋</family>
                </font>
               </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
+              </property>
               <property name="text">
                <string>添加预置位</string>
               </property>
@@ -135,10 +166,28 @@
            </layout>
           </item>
           <item>
-           <widget class="QListView" name="presetLocationValueList"/>
+           <widget class="QListView" name="presetLocationValueList">
+            <property name="styleSheet">
+             <string>color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_14">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <spacer name="horizontalSpacer_7">
@@ -165,6 +214,10 @@
                <pointsize>12</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>云台</string>
              </property>
@@ -187,7 +240,7 @@
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>32</height>
+                  <height>27</height>
                  </size>
                 </property>
                </spacer>
@@ -243,6 +296,10 @@
                      <font>
                       <family>仿宋</family>
                      </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
                     </property>
                     <property name="text">
                      <string>←</string>
@@ -301,6 +358,10 @@
                       <family>仿宋</family>
                      </font>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
+                    </property>
                     <property name="text">
                      <string>↑</string>
                     </property>
@@ -344,6 +405,10 @@
                       <family>仿宋</family>
                      </font>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
+                    </property>
                     <property name="text">
                      <string>复位</string>
                     </property>
@@ -386,6 +451,10 @@
                      <font>
                       <family>仿宋</family>
                      </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
                     </property>
                     <property name="text">
                      <string>↓</string>
@@ -441,6 +510,10 @@
                       <family>仿宋</family>
                      </font>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
+                    </property>
                     <property name="text">
                      <string>→</string>
                     </property>
@@ -484,7 +557,7 @@
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>32</height>
+                  <height>27</height>
                  </size>
                 </property>
                </spacer>
@@ -503,6 +576,10 @@
                <family>仿宋</family>
                <pointsize>12</pointsize>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
               <string>焦距</string>
@@ -526,7 +603,7 @@
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>28</height>
+                  <height>21</height>
                  </size>
                 </property>
                </spacer>
@@ -565,6 +642,10 @@
                     <family>仿宋</family>
                    </font>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
+                  </property>
                   <property name="text">
                    <string>+</string>
                   </property>
@@ -601,6 +682,10 @@
                    <font>
                     <family>仿宋</family>
                    </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
                   </property>
                   <property name="text">
                    <string>聚焦</string>
@@ -639,6 +724,10 @@
                     <family>仿宋</family>
                    </font>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
+                  </property>
                   <property name="text">
                    <string>-</string>
                   </property>
@@ -667,7 +756,7 @@
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>29</height>
+                  <height>24</height>
                  </size>
                 </property>
                </spacer>
@@ -678,6 +767,19 @@
           </layout>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_15">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>30</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <spacer name="horizontalSpacer_8">
@@ -719,6 +821,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>自动跟踪</string>
              </property>
@@ -742,6 +848,10 @@
               <font>
                <family>仿宋</family>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -785,6 +895,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>横竖屏切换</string>
              </property>
@@ -808,6 +922,10 @@
               <font>
                <family>仿宋</family>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
               <string>横屏</string>
@@ -851,6 +969,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>手势控制</string>
              </property>
@@ -874,6 +996,10 @@
               <font>
                <family>仿宋</family>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -917,6 +1043,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>自动变焦</string>
              </property>
@@ -940,6 +1070,10 @@
               <font>
                <family>仿宋</family>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -983,6 +1117,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>白平衡</string>
              </property>
@@ -1007,6 +1145,10 @@
                <family>仿宋</family>
                <pointsize>9</pointsize>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <item>
               <property name="text">
@@ -1072,6 +1214,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>曝光模式</string>
              </property>
@@ -1096,6 +1242,10 @@
                <family>仿宋</family>
                <pointsize>9</pointsize>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <item>
               <property name="text">
@@ -1151,6 +1301,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>ISO</string>
              </property>
@@ -1175,6 +1329,10 @@
                <family>仿宋</family>
                <pointsize>9</pointsize>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <item>
               <property name="text">
@@ -1250,6 +1408,10 @@
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30, 30);</string>
+             </property>
              <property name="text">
               <string>UVC</string>
              </property>
@@ -1273,6 +1435,10 @@
               <font>
                <family>仿宋</family>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -1328,20 +1494,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QMenu" name="menuAbout">
-    <property name="baseSize">
-     <size>
-      <width>0</width>
-      <height>2</height>
-     </size>
-    </property>
-    <property name="title">
-     <string>关于</string>
-    </property>
-    <addaction name="actionOBSBOT"/>
-   </widget>
    <addaction name="menuObsbotDesktopApplication"/>
-   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">

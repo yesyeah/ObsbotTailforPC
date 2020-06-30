@@ -90,7 +90,7 @@ void MainWindow::on_presetLocationAddButton_clicked()
     QStandardItem *item = new QStandardItem(presetLocationStr);
     ItemModel->appendRow(item);
     ui->presetLocationValueList->setModel(ItemModel);
-    ui->presetLocationValueList->setFixedWidth(311);
+    //ui->presetLocationValueList->setFixedWidth(311);
 
     connect(ui->presetLocationValueList, SIGNAL(clicked(QModelIndex)), this, SLOT(triggerPresetLocation(QModelIndex)));
     //ui->presetLocationValueList->clicked.connect(triggerPresetLocation);

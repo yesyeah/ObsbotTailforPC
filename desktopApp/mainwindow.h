@@ -25,8 +25,10 @@ public:
     QStringListModel *Model;
     QStandardItemModel *ItemModel;
 private slots:
-    void on_presetLocationAddButton_clicked();
     void triggerPresetLocation(QModelIndex id);
+
+    void on_presetLocationAddButton_clicked();
+
     void showPresetLocation();
 
     void on_gimbalResetButton_clicked();

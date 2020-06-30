@@ -15,7 +15,10 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>icon/logo.png</normaloff>icon/logo.png</iconset>
+    <normaloff>icon/defaultlaunch.png</normaloff>icon/defaultlaunch.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(30, 30, 30);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="deviceLabel">
@@ -26,6 +29,9 @@
       <width>72</width>
       <height>15</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>设备列表</string>
