@@ -1,5 +1,4 @@
 #include "remoservice.h"
-#include "remoprotocolutils.h"
 #include <bitset>
 
 using namespace std;
@@ -58,7 +57,6 @@ bool RemoService::init(){
     }
 
     closesocket(sockClient);
-
 }
 
 bool RemoService::communicateInit(){
@@ -115,8 +113,8 @@ unsigned char* RemoService::dataPack(char command, unsigned short description, c
     communicationData[11] = description & 0x00ff;   //description
 
     //headCheckBit = CRC16_USB(communicationData, 12) & 0x00ff;
-    communicationData[8] = CRC16_USB(communicationData, 12) & 0x00ff;
-    checkSum = CRC16_USB(communicationData, 12) & 0xffff;
+    communicationData[8] = Util::CRC16_USB(communicationData, 12) & 0x00ff;
+    checkSum = Util::CRC16_USB(communicationData, 12) & 0xffff;
     communicationData[6] = (checkSum & 0xff00) > 8;
     communicationData[7] = (checkSum & 0x00ff);
 

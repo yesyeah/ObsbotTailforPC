@@ -1,5 +1,9 @@
 #ifndef UTILS_H
 #define UTILS_H
+#include <string>
+#include <iostream>
+#include <qstring.h>
+#include <qtextcodec.h>
 
 #define CAMERA_CTL_PORT 80
 #define AI_CTL_PORT 27739
@@ -62,6 +66,25 @@ enum AutoZoom{
     AZ_OFF = 0,
     AZ_ON = 1,
 };
+
+class Util{
+public:
+
+    static void InvertUint8(unsigned char *dBuf,unsigned char *srcBuf);
+    static void InvertUint16(unsigned short *dBuf,unsigned short *srcBuf);
+    static void InvertUint32(unsigned int *dBuf,unsigned int *srcBuf);
+    static unsigned short CRC16_USB(unsigned char *data, unsigned int datalen);
+
+    static std::string string_To_UTF8(const std::string & str);
+    static QString GBK2UTF8(const QString &str);
+
+    static QString UTF82GBK(const QString &str);
+
+    static std::string GBK2UTF8(std::string &str);
+
+    static std::string UTF82GBK(std::string &str);
+};
+
 
 
 #endif

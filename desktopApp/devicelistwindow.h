@@ -5,7 +5,6 @@
 #include <QStringListModel>
 #include <QStandardItemModel>
 #include <QModelIndex>
-#include "cameracontrol.h"
 #include "mainwindow.h"
 
 namespace Ui {

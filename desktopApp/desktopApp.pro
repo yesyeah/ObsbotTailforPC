@@ -31,7 +31,8 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    remoservice.cpp
+    remoservice.cpp \
+    utils.cpp
 
 HEADERS += \
     devicelistwindow.h \

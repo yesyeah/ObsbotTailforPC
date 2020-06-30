@@ -228,6 +228,7 @@ void MainWindow::on_autoZoomButton_clicked()
 
 void MainWindow::on_uvcButton_clicked(){
 
+
 }
 
 void MainWindow::on_objectDefaultViewButton_clicked(){
@@ -243,3 +244,22 @@ void MainWindow::on_objectDefaultViewButton_clicked(){
     }
     handle->AIDefaultViewSet(!currentDefaultView);
 }
+
+void MainWindow::on_witheBalanceComboBox_currentIndexChanged(const QString &arg1){
+    std::cout<< "current white balance 0 : "<< ui->witheBalanceComboBox->currentText().toStdString()<<std::endl;
+    QString currentWhiteBalance =  Util::GBK2UTF8(ui->witheBalanceComboBox->currentText());
+    std::cout<< "current white balance : "<< currentWhiteBalance.toStdString()<<std::endl;
+}
+
+void MainWindow::on_exposeComboBox_currentIndexChanged(const QString &arg1){
+    std::cout<< "current expose  0 : "<< ui->exposeComboBox->currentText().toStdString()<<std::endl;
+    QString currentExpose = Util::GBK2UTF8(ui->exposeComboBox->currentText());
+    std::cout<< "current expose  : "<<currentExpose.toStdString()<<std::endl;
+}
+
+void MainWindow::on_isoComboBox_currentIndexChanged(const QString &arg1){
+    std::cout<< "current iso  0 : "<< ui->isoComboBox->currentText().toStdString()<<std::endl;
+    QString currentISO =  Util::GBK2UTF8(ui->isoComboBox->currentText());
+    std::cout<< "current iso  : "<<  currentISO.toStdString()<<std::endl;
+}
+

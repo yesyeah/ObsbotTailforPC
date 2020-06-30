@@ -9,6 +9,7 @@
 #include "utils.h"
 #include "icmp_ping.h"
 #include "httpservice.h"
+#include "remoservice.h"
 
 #include "nlohmann/json.hpp"
 
@@ -87,6 +88,17 @@ public:
     int GetCurrentZoomSpeed();
     std::string GetAbsZoom();
 
+    Remo_Camera_WhiteBalance_S CameraWhiteBalanceGet();
+    bool CameraWhiteBalanceSet(Remo_Camera_WhiteBalance_s value);
+
+    Remo_Camera_ISO_s CameraISOGet();
+    bool CameraISOSet(Remo_Camera_ISO_s value);
+
+    Remo_Camera_AeMode_s CameraExposeGet();
+    bool CameraExposeSet(Remo_Camera_AeMode_s value);
+
+    bool CameraPoweroff();
+
     bool SetCameraIP(std::string ip_addr);
     std::string GetCameraIP();
     std::string GetCameraDefaultIP();
@@ -100,6 +112,7 @@ private:
 
     CURL* curlHandle;
     HttpService httpHandle;
+    //RemoService remoHandle;
     std::string localIP;
     std::string cameraIP;
     std::string cameraDefaultIP;
@@ -113,6 +126,10 @@ private:
     GimbalLocation gimbalDefaultResetLocation;
     GimbalPresetLocation gimbalPreserLocation;
     std::vector<GimbalPresetLocation> gimbalPresetLocationList;
+
+    Remo_Camera_ISO_s currentIso;
+    Remo_Camera_AeMode_s currentExpose;
+    Remo_Camera_WhiteBalance_s currentWhiteBalance;
 
     int isAutoTracking;
     int isTargetTracking;

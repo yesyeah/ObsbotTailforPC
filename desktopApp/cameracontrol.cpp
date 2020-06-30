@@ -110,6 +110,7 @@ void CameraControl::init(){
     aiConctrlAddr = "http://"+cameraIP+":27739";
     aiInit();
     cameraInit();
+    //remoHandle.init();
     //WifiInfoGet(cameraIP);
     return;
 }
@@ -130,9 +131,6 @@ bool CameraControl::aiInit(){
 
             isTracking = recv_msg["tracking"];
             std::cout<<"tracking status:" <<isTracking<<std::endl;
-
-            // isGimbalLock = !recv_msg["tracking"];
-            // std::cout<<"gimbal status:" <<isGimbalLock<<std::endl;
 
             isHandposeCtl = recv_msg["handpose"];
             std::cout<<"hand pose ctl status:" <<isHandposeCtl<<std::endl;
@@ -595,4 +593,32 @@ bool CameraControl::CameraAutoZoomSet(bool on){
 
 bool CameraControl::CameraAutoZoomGet(){
     return isAutoZoom;
+}
+
+Remo_Camera_WhiteBalance_S CameraControl::CameraWhiteBalanceGet(){
+
+}
+
+bool CameraControl::CameraWhiteBalanceSet(Remo_Camera_WhiteBalance_s value){
+
+}
+
+Remo_Camera_ISO_s CameraControl::CameraISOGet(){
+
+}
+
+bool CameraISOSet(Remo_Camera_ISO_s value){
+
+}
+
+Remo_Camera_AeMode_s CameraExposeGet(){
+
+}
+
+bool CameraExposeSet(Remo_Camera_AeMode_s value){
+
+}
+
+bool CameraPoweroff(){
+
 }

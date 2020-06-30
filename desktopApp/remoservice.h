@@ -3,6 +3,7 @@
 #include <iostream>
 #include <winsock2.h>
 #include "remoprotocolutils.h"
+#include "utils.h"
 #pragma pack (4)
 
 #define REMO_PROCOTOL_ADDRESS "192.168.0.20"

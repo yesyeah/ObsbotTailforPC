@@ -6,6 +6,7 @@
 #include <QStandardItemModel>
 #include <QModelIndex>
 #include "cameracontrol.h"
+#include "utils.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,6 +27,12 @@ public:
     QStandardItemModel *ItemModel;
 private slots:
     void triggerPresetLocation(QModelIndex id);
+
+    void on_witheBalanceComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_exposeComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_isoComboBox_currentIndexChanged(const QString &arg1);
 
     void on_presetLocationAddButton_clicked();
 
@@ -56,6 +63,8 @@ private slots:
     void on_uvcButton_clicked();
 
     void on_objectDefaultViewButton_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;

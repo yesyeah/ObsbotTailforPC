@@ -2,7 +2,6 @@
 #define LOGINWINDOW_H
 
 #include <QMainWindow>
-#include "cameracontrol.h"
 #include "devicelistwindow.h"
 
 namespace Ui {
