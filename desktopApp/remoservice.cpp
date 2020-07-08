@@ -1,8 +1,10 @@
 #include "remoservice.h"
 #include <bitset>
+#include <stdio.h>
+#include <cstring>
+#include <string>
 
 using namespace std;
-extern unsigned short CRC16_USB(unsigned char *data, unsigned int datalen);
 
 RemoService::RemoService(){
     packSeq = 0;
@@ -19,9 +21,12 @@ RemoService::RemoService(){
         std::cout<<"error while create remo service"<<std::endl;
     }
 
+    std::cout<<"new remo service"<<std::endl;
+
 }
 
 RemoService::~RemoService(){
+    closesocket(sockClient);
     WSACleanup();
 }
 
@@ -36,27 +41,23 @@ bool RemoService::ApertureMSet(){
 }
 
 bool RemoService::init(){
+    sockClient = socket(AF_INET, SOCK_DGRAM, 0);
 
-
-    SOCKET sockClient = socket(AF_INET, SOCK_DGRAM, 0);
-    SOCKADDR_IN addrClient;
-    addrClient.sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
+    addrClient.sin_addr.S_un.S_addr = inet_addr(REMO_PROCOTOL_ADDRESS);
     addrClient.sin_family = AF_INET;
-    addrClient.sin_port = htons(6000);
+    addrClient.sin_port = htons(REMO_PROCOTOL_PORT);
 
-    char recvBuf[100];
-    char sendBuf[100];
-    char tempBuf[200];
+    //char recvBuf[100];
+    //char sendBuf[100];
+    //char tempBuf[200];
 
-
-    int len = sizeof(SOCKADDR);
-    while(1){
+    //int len = sizeof(SOCKADDR);
+   /* while(1){
         gets(sendBuf);
         sendto(sockClient, sendBuf,strlen(sendBuf)+1, 0, (SOCKADDR*)&addrClient, len);
         recvfrom(sockClient, recvBuf, 100, 0, (SOCKADDR*)&addrClient, &len);
-    }
-
-    closesocket(sockClient);
+    }*/
+    std::cout<<"socket init"<<std::endl;
 }
 
 bool RemoService::communicateInit(){
@@ -131,6 +132,22 @@ bool RemoService::dataUnPack(char* data, RemoProcotolHead* response){
 
     return true;
 }
+
+bool RemoService::request(char command, unsigned short description, char receiver){
+    unsigned char* sendBuf = dataPack(command, description, receiver);
+
+    std::cout<<"send buf "<< sendBuf<<std::endl;
+    unsigned char* recvBuf = new unsigned char (2048);
+
+    int recv_len = 0;
+   // sendto(sockClient, sendBuf, strlen(sendBuf)+1, 0, (SOCKADDR*)&addrClient, sizeof(SOCKADDR);
+   // recvfrom(sockClient, recvBuf, 100, 0, (SOCKADDR*)&addrClient, &recv_len);
+
+
+    delete  sendBuf;
+    delete  recvBuf;
+}
+
 
 bool RemoService::ApertureCurGet(){
 

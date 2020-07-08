@@ -110,7 +110,7 @@ void CameraControl::init(){
     aiConctrlAddr = "http://"+cameraIP+":27739";
     aiInit();
     cameraInit();
-    //remoHandle.init();
+    remoHandle.init();
     //WifiInfoGet(cameraIP);
     return;
 }
@@ -594,6 +594,20 @@ bool CameraControl::CameraAutoZoomSet(bool on){
 bool CameraControl::CameraAutoZoomGet(){
     return isAutoZoom;
 }
+
+bool CameraControl::TargetSelect(){
+    std::string url = aiConctrlAddr + "/obsbot/tail/ai";
+    std::string res;
+    json send_msg;
+    send_msg["cmd"] = "SdkSetTargetByPoint";
+    send_msg["x"] = 0.5;
+    send_msg["y"] = 0.5;
+    httpHandle.postRequest(url, send_msg.dump(), res);
+    std::cout<<"target  select  result : "<<res<<std::endl;
+
+    return true;
+}
+
 
 Remo_Camera_WhiteBalance_S CameraControl::CameraWhiteBalanceGet(){
 

@@ -66,6 +66,8 @@ private slots:
 
 
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     std::shared_ptr<CameraControl> handle;

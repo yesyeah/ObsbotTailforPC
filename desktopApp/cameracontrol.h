@@ -103,6 +103,8 @@ public:
     std::string GetCameraIP();
     std::string GetCameraDefaultIP();
 
+    bool TargetSelect();
+
 
 private:
     std::string GetCameraUrl();
@@ -112,7 +114,7 @@ private:
 
     CURL* curlHandle;
     HttpService httpHandle;
-    //RemoService remoHandle;
+    RemoService remoHandle;
     std::string localIP;
     std::string cameraIP;
     std::string cameraDefaultIP;

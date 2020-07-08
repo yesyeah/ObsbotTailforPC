@@ -32,9 +32,11 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
 
     if (handle->AITrackingGet()){
         ui->autoTrackingButton->setText("打开");
+        ui->pushButton->setEnabled(true);
         std::cout<<"auto tracking is  on "<<std::endl;
     } else {
         ui->autoTrackingButton->setText("关闭");
+        ui->pushButton->setEnabled(false);
         std::cout<<"auto tracking is  off "<<std::endl;
     }
     if (handle->AIHandposeGet()){
@@ -167,12 +169,12 @@ void MainWindow::on_gimbalRightButton_clicked()
 
 void MainWindow::on_zoomAddButton_clicked()
 {
-    handle->CameraZoomSet(5);
+    handle->CameraZoomSet(500);
 }
 
 void MainWindow::on_zoomReduceButton_clicked()
 {
-    handle->CameraZoomSet(-5);
+    handle->CameraZoomSet(-500);
 }
 
 void MainWindow::on_autoTrackingButton_clicked()
@@ -180,9 +182,12 @@ void MainWindow::on_autoTrackingButton_clicked()
     bool trackingStatus = handle->AITrackingGet();
     if (!trackingStatus){
         ui->autoTrackingButton->setText("打开");
+        ui->pushButton->setEnabled(true);
         std::cout<<"auto tracking is  on "<<std::endl;
     } else {
         ui->autoTrackingButton->setText("关闭");
+        ui->pushButton->setEnabled(false);
+
         std::cout<<"auto tracking is  off "<<std::endl;
 
     }
@@ -263,3 +268,8 @@ void MainWindow::on_isoComboBox_currentIndexChanged(const QString &arg1){
     std::cout<< "current iso  : "<<  currentISO.toStdString()<<std::endl;
 }
 
+
+void MainWindow::on_pushButton_clicked(){
+    handle->TargetSelect();
+    std::cout<<"target select"<<std::endl;
+}

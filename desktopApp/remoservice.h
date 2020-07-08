@@ -46,6 +46,8 @@ public:
     unsigned char* dataPack(char command, unsigned short description, char receiver);
     bool dataUnPack(char* data, RemoProcotolHead* response);
 
+    bool request(char command, unsigned short description, char receiver);
+
     bool ExposureCurGet();
     bool ApertureCurGet();
     bool ShutterCurGet();
@@ -77,6 +79,8 @@ public:
     bool UsbModeGet();
 
 private:
+    SOCKET sockClient;
+    SOCKADDR_IN addrClient;
     int exposureType;
     unsigned short packSeq;
 };

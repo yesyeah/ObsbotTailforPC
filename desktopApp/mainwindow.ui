@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
-    <height>720</height>
+    <width>1920</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -18,8 +18,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>960</width>
-    <height>720</height>
+    <width>1000000</width>
+    <height>1000000</height>
    </size>
   </property>
   <property name="font">
@@ -32,14 +32,14 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>icon/defaultlaunch.png</normaloff>icon/defaultlaunch.png</iconset>
+    <normaloff>icon/logo.png</normaloff>icon/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(30, 30, 30);</string>
   </property>
   <property name="iconSize">
    <size>
-    <width>24</width>
+    <width>100</width>
     <height>24</height>
    </size>
   </property>
@@ -800,6 +800,47 @@ background-color: rgb(47, 47, 47);</string>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(47, 47, 47);</string>
+           </property>
+           <property name="text">
+            <string>一键选人</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
             <widget class="QLabel" name="autoTrackingLable">
@@ -861,7 +902,7 @@ background-color: rgb(47, 47, 47);</string>
           </layout>
          </item>
          <item>
-          <spacer name="verticalSpacer_13">
+          <spacer name="verticalSpacer_20">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -1249,17 +1290,17 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <item>
               <property name="text">
-               <string>P档</string>
+               <string>P</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>S档</string>
+               <string>S</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>M档</string>
+               <string>M</string>
               </property>
              </item>
             </widget>
@@ -1485,7 +1526,7 @@ background-color: rgb(47, 47, 47);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>960</width>
+     <width>1920</width>
      <height>25</height>
     </rect>
    </property>
