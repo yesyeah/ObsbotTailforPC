@@ -130,7 +130,7 @@ background-color: rgb(30, 30, 30);</string>
 background-color: rgb(30, 30, 30);</string>
               </property>
               <property name="text">
-               <string>预置位</string>
+               <string>Preset Position</string>
               </property>
              </widget>
             </item>
@@ -159,7 +159,7 @@ background-color: rgb(30, 30, 30);</string>
 background-color: rgb(47, 47, 47);</string>
               </property>
               <property name="text">
-               <string>添加预置位</string>
+               <string>Add Preset</string>
               </property>
              </widget>
             </item>
@@ -219,7 +219,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>云台</string>
+              <string>Gimbal</string>
              </property>
             </widget>
            </item>
@@ -405,12 +405,15 @@ background-color: rgb(47, 47, 47);</string>
                       <family>仿宋</family>
                      </font>
                     </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
                     <property name="styleSheet">
                      <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(47, 47, 47);</string>
                     </property>
                     <property name="text">
-                     <string>复位</string>
+                     <string>Reset</string>
                     </property>
                    </widget>
                   </item>
@@ -451,6 +454,9 @@ background-color: rgb(47, 47, 47);</string>
                      <font>
                       <family>仿宋</family>
                      </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">color: rgb(255, 255, 255);
@@ -582,7 +588,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>焦距</string>
+              <string>Zoom</string>
              </property>
             </widget>
            </item>
@@ -688,7 +694,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(47, 47, 47);</string>
                   </property>
                   <property name="text">
-                   <string>聚焦</string>
+                   <string>Focus</string>
                   </property>
                  </widget>
                 </item>
@@ -823,7 +829,7 @@ background-color: rgb(47, 47, 47);</string>
             <string notr="true">background-color: rgb(47, 47, 47);</string>
            </property>
            <property name="text">
-            <string>一键选人</string>
+            <string>Tap  Lock</string>
            </property>
           </widget>
          </item>
@@ -846,13 +852,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="autoTrackingLable">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -867,7 +873,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>自动跟踪</string>
+              <string>Auto Tracking</string>
              </property>
             </widget>
            </item>
@@ -875,13 +881,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QPushButton" name="autoTrackingButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -895,7 +901,7 @@ background-color: rgb(30, 30, 30);</string>
 background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string>ON</string>
              </property>
             </widget>
            </item>
@@ -920,13 +926,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="objectDefaultView">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -941,7 +947,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>横竖屏切换</string>
+              <string>Tap  Switch</string>
              </property>
             </widget>
            </item>
@@ -949,13 +955,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QPushButton" name="objectDefaultViewButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -969,7 +975,7 @@ background-color: rgb(30, 30, 30);</string>
 background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
-              <string>横屏</string>
+              <string>Landscape</string>
              </property>
             </widget>
            </item>
@@ -994,13 +1000,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="handPoseLabel">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -1015,7 +1021,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>手势控制</string>
+              <string>Gesture Control</string>
              </property>
             </widget>
            </item>
@@ -1023,13 +1029,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QPushButton" name="handPoseButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -1043,7 +1049,7 @@ background-color: rgb(30, 30, 30);</string>
 background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string>ON</string>
              </property>
             </widget>
            </item>
@@ -1068,13 +1074,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="autoZoomLabel">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -1089,7 +1095,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>自动变焦</string>
+              <string>Auto Zoom</string>
              </property>
             </widget>
            </item>
@@ -1097,13 +1103,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QPushButton" name="autoZoomButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -1117,7 +1123,7 @@ background-color: rgb(30, 30, 30);</string>
 background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string>ON</string>
              </property>
             </widget>
            </item>
@@ -1142,13 +1148,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="witheBalanceLabel">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -1163,7 +1169,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>白平衡</string>
+              <string>White Balance</string>
              </property>
             </widget>
            </item>
@@ -1171,13 +1177,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QComboBox" name="witheBalanceComboBox">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -1193,27 +1199,27 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <item>
               <property name="text">
-               <string>自动</string>
+               <string>AUTO</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>白炽灯</string>
+               <string>Incandescent</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>荧光灯</string>
+               <string>Fluorescent</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>晴天</string>
+               <string>Sunny</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>阴天</string>
+               <string>Overcast</string>
               </property>
              </item>
             </widget>
@@ -1239,13 +1245,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="exposeLabel">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -1260,7 +1266,7 @@ background-color: rgb(47, 47, 47);</string>
 background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
-              <string>曝光模式</string>
+              <string>Exposure Mode</string>
              </property>
             </widget>
            </item>
@@ -1268,13 +1274,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QComboBox" name="exposeComboBox">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -1326,13 +1332,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="isoLabel">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -1355,13 +1361,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QComboBox" name="isoComboBox">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -1433,13 +1439,13 @@ background-color: rgb(47, 47, 47);</string>
             <widget class="QLabel" name="uvcLabel">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>150</width>
                <height>30</height>
               </size>
              </property>
@@ -1462,13 +1468,13 @@ background-color: rgb(30, 30, 30);</string>
             <widget class="QPushButton" name="uvcButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>120</width>
                <height>30</height>
               </size>
              </property>
@@ -1482,7 +1488,7 @@ background-color: rgb(30, 30, 30);</string>
 background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string>ON</string>
              </property>
             </widget>
            </item>

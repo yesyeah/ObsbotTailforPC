@@ -22,37 +22,37 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
         ui->zoomAddButton->setEnabled(false);
         ui->zoomReduceButton->setEnabled(false);
         ui->zoomButton->setEnabled(false);
-        ui->autoZoomButton->setText("打开");
+        ui->autoZoomButton->setText("ON");
     } else {
         ui->zoomAddButton->setEnabled(true);
         ui->zoomReduceButton->setEnabled(true);
         ui->zoomButton->setEnabled(true);
-        ui->autoZoomButton->setText("关闭");
+        ui->autoZoomButton->setText("OFF");
     }
 
     if (handle->AITrackingGet()){
-        ui->autoTrackingButton->setText("打开");
+        ui->autoTrackingButton->setText("ON");
         ui->pushButton->setEnabled(true);
         std::cout<<"auto tracking is  on "<<std::endl;
     } else {
-        ui->autoTrackingButton->setText("关闭");
+        ui->autoTrackingButton->setText("OFF");
         ui->pushButton->setEnabled(false);
         std::cout<<"auto tracking is  off "<<std::endl;
     }
     if (handle->AIHandposeGet()){
-        ui->handPoseButton->setText("打开");
+        ui->handPoseButton->setText("ON");
     } else {
-        ui->handPoseButton->setText("关闭");
+        ui->handPoseButton->setText("OFF");
     }
 
     if (!handle->AIDefaultViewGet()){
         //default view landscape
-        ui->objectDefaultViewButton->setText("横屏");
+        ui->objectDefaultViewButton->setText("Landscape");
         std::cout<<"default view  is  landscape "<<std::endl;
 
     } else {
         std::cout<<"default view is not landscape "<<std::endl;
-        ui->objectDefaultViewButton->setText("竖屏");
+        ui->objectDefaultViewButton->setText("Portrait");
     }
 
    // showPresetLocation();
@@ -181,11 +181,11 @@ void MainWindow::on_autoTrackingButton_clicked()
 {
     bool trackingStatus = handle->AITrackingGet();
     if (!trackingStatus){
-        ui->autoTrackingButton->setText("打开");
+        ui->autoTrackingButton->setText("ON");
         ui->pushButton->setEnabled(true);
         std::cout<<"auto tracking is  on "<<std::endl;
     } else {
-        ui->autoTrackingButton->setText("关闭");
+        ui->autoTrackingButton->setText("OFF");
         ui->pushButton->setEnabled(false);
 
         std::cout<<"auto tracking is  off "<<std::endl;
@@ -198,11 +198,11 @@ void MainWindow::on_handPoseButton_clicked()
 {
     bool handPoseStatus = !handle->AIHandposeGet();
     if (handPoseStatus){
-        ui->handPoseButton->setText("打开");
+        ui->handPoseButton->setText("ON");
         std::cout<<"hand pose is  on "<<std::endl;
 
     } else {
-        ui->handPoseButton->setText("关闭");
+        ui->handPoseButton->setText("OFF");
         std::cout<<"hande pose is  off "<<std::endl;
 
     }
@@ -217,7 +217,7 @@ void MainWindow::on_autoZoomButton_clicked()
         ui->zoomAddButton->setEnabled(false);
         ui->zoomReduceButton->setEnabled(false);
         ui->zoomButton->setEnabled(false);
-        ui->autoZoomButton->setText("打开");
+        ui->autoZoomButton->setText("ON");
         std::cout<<"auto zomm is  on "<<std::endl;
 
     } else {
@@ -226,7 +226,7 @@ void MainWindow::on_autoZoomButton_clicked()
         ui->zoomReduceButton->setEnabled(true);
         ui->zoomButton->setEnabled(true);
         std::cout<<"auto zoom is  off "<<std::endl;
-        ui->autoZoomButton->setText("关闭");
+        ui->autoZoomButton->setText("OFF");
     }
     handle->CameraAutoZoomSet(!currentZoomStatus);
 }
@@ -240,12 +240,12 @@ void MainWindow::on_objectDefaultViewButton_clicked(){
     bool currentDefaultView = handle->AIDefaultViewGet();
     if (!currentDefaultView){
         //default view landscape
-        ui->objectDefaultViewButton->setText("横屏");
+        ui->objectDefaultViewButton->setText("Landscape");
         std::cout<<"default view  is  landscape "<<std::endl;
 
     } else {
         std::cout<<"default view is not landscape "<<std::endl;
-        ui->objectDefaultViewButton->setText("竖屏");
+        ui->objectDefaultViewButton->setText("Portrait");
     }
     handle->AIDefaultViewSet(!currentDefaultView);
 }

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>欢迎使用Obsbot寻影相机</string>
+   <string>Obsbot Tail</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -27,21 +27,21 @@
    <widget class="QPushButton" name="deviceSearchButton">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>110</x>
       <y>160</y>
-      <width>100</width>
+      <width>150</width>
       <height>40</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>100</width>
+      <width>150</width>
       <height>40</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>100</width>
+      <width>150</width>
       <height>40</height>
      </size>
     </property>
@@ -50,7 +50,7 @@
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>搜索设备</string>
+     <string>Connect Device</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -70,7 +70,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>连接方式</string>
+        <string>Connection</string>
        </property>
       </widget>
      </item>
