@@ -32,6 +32,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     remoservice.cpp \
+    switchbutton.cpp \
     utils.cpp
 
 HEADERS += \
@@ -43,6 +44,7 @@ HEADERS += \
     mainwindow.h \
     remoprotocolutils.h \
     remoservice.h \
+    switchbutton.h \
     utils.h
 
 FORMS += \

@@ -6,6 +6,7 @@
 #include <QStandardItemModel>
 #include <QModelIndex>
 #include "cameracontrol.h"
+#include "switchbutton.h"
 #include "utils.h"
 
 QT_BEGIN_NAMESPACE
@@ -70,6 +71,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SwitchButton aiTrackButtion;
     std::shared_ptr<CameraControl> handle;
 };
 #endif // MAINWINDOW_H
