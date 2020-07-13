@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>icon/向上.jpg</file>
+        <file>icon/向下.jpg</file>
+        <file>icon/向右.jpg</file>
+        <file>icon/向左.jpg</file>
+        <file>icon/右上.jpg</file>
+        <file>icon/右下.jpg</file>
+        <file>icon/左上.jpg</file>
+        <file>icon/左下.jpg</file>
+    </qresource>
+</RCC>

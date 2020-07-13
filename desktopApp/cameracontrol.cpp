@@ -286,12 +286,14 @@ bool CameraControl::CameraDirectionSet(int x, int y){
 
     send_msg["cmd"] = "setAbsDegree";
     send_msg["rollDegree"] = -1000;
+    send_msg["pitchDegree"] = pitch;
+    send_msg["yawDegree"] = yaw;
     if (y == 0){
         send_msg["pitchDegree"] = -1000;
-        send_msg["yawDegree"] = yaw;
+        //send_msg["yawDegree"] = yaw;
     }
     if (x == 0){
-        send_msg["pitchDegree"] = pitch;
+       //send_msg["pitchDegree"] = pitch;
         send_msg["yawDegree"] = -1000;
     }
 
@@ -508,7 +510,8 @@ bool CameraControl::CameraZoomSet(int pos){
     std::string res;
     json send_msg;
     send_msg["msg_id"] = CommandId::ZOOM_CFG;
-    send_msg["pos"] = currentZoomPos+pos;
+    //send_msg["pos"] = currentZoomPos+pos;
+    send_msg["pos"] = pos;
     send_msg["speed"] = 5;
 
     httpHandle.postRequest(url, send_msg.dump(), res);
@@ -535,8 +538,25 @@ bool  CameraControl::CameraZoomGet(){
     return true;
 }
 
-int CameraControl::GetCurrentZoom(){
-    return currentZoomPos;
+float CameraControl::GetCurrentZoom(){
+    if (currentZoomPos < 1250){
+        return 1.0;
+    }else if (currentZoomPos < 1750){
+        return 1.5;
+    }else if (currentZoomPos < 2250){
+        return 2.0;
+    }else if (currentZoomPos < 2750){
+        return 2.5;
+    }else if (currentZoomPos < 3250){
+        return 3.0;
+    }else if (currentZoomPos < 3750){
+        return 3.5;
+    }else if (currentZoomPos < 4250){
+        return 4.0;
+    }else if (currentZoomPos < 4750){
+        return 4.5;
+    }
+    return 5.0;
 }
 
 int CameraControl::GetCurrentZoomSpeed(){

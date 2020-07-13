@@ -6,20 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>899</width>
+    <height>515</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>960</width>
-    <height>720</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1000000</width>
-    <height>1000000</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="font">
@@ -28,14 +34,14 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>ObsbotDestopApp</string>
+   <string>CECV相机控制端</string>
   </property>
   <property name="windowIcon">
    <iconset>
     <normaloff>icon/logo.png</normaloff>icon/logo.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(30, 30, 30);</string>
+   <string notr="true">background-color: rgb(0, 0, 0);</string>
   </property>
   <property name="iconSize">
    <size>
@@ -74,7 +80,7 @@
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
@@ -106,7 +112,7 @@ background-color: rgb(30, 30, 30);</string>
          </property>
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -127,7 +133,7 @@ background-color: rgb(30, 30, 30);</string>
               </property>
               <property name="styleSheet">
                <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>预置位</string>
@@ -156,7 +162,7 @@ background-color: rgb(30, 30, 30);</string>
               </property>
               <property name="styleSheet">
                <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30,30);</string>
               </property>
               <property name="text">
                <string>添加预置位</string>
@@ -216,7 +222,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>云台</string>
@@ -225,6 +231,9 @@ background-color: rgb(30, 30, 30);</string>
            </item>
            <item>
             <widget class="QFrame" name="GimbalArea">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(0, 0, 0);</string>
+             </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
@@ -263,17 +272,36 @@ background-color: rgb(30, 30, 30);</string>
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_4">
                   <item>
-                   <spacer name="verticalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
+                   <widget class="QPushButton" name="gimbalUpLeftButton">
+                    <property name="minimumSize">
                      <size>
-                      <width>20</width>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/左上.jpg</normaloff>:/image/icon/左上.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>40</width>
                       <height>40</height>
                      </size>
                     </property>
-                   </spacer>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="gimbalLeftButton">
@@ -298,11 +326,20 @@ background-color: rgb(30, 30, 30);</string>
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="text">
-                     <string>←</string>
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/向左.jpg</normaloff>:/image/icon/向左.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
                     </property>
                     <property name="autoDefault">
                      <bool>false</bool>
@@ -310,17 +347,36 @@ background-color: rgb(47, 47, 47);</string>
                    </widget>
                   </item>
                   <item>
-                   <spacer name="verticalSpacer">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
+                   <widget class="QPushButton" name="gimbalDownLeftButton">
+                    <property name="minimumSize">
                      <size>
-                      <width>20</width>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/左下.jpg</normaloff>:/image/icon/左下.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>40</width>
                       <height>40</height>
                      </size>
                     </property>
-                   </spacer>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -359,11 +415,20 @@ background-color: rgb(47, 47, 47);</string>
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="text">
-                     <string>↑</string>
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/向上.jpg</normaloff>:/image/icon/向上.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
@@ -406,8 +471,7 @@ background-color: rgb(47, 47, 47);</string>
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+                     <string notr="true">background-color: rgb(30, 30, 30);</string>
                     </property>
                     <property name="text">
                      <string>复位</string>
@@ -453,11 +517,20 @@ background-color: rgb(47, 47, 47);</string>
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="text">
-                     <string>↓</string>
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/向下.jpg</normaloff>:/image/icon/向下.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
@@ -479,17 +552,36 @@ background-color: rgb(47, 47, 47);</string>
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_5">
                   <item>
-                   <spacer name="verticalSpacer_3">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
+                   <widget class="QPushButton" name="gimbalUpRightButton">
+                    <property name="minimumSize">
                      <size>
-                      <width>20</width>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/右上.jpg</normaloff>:/image/icon/右上.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>40</width>
                       <height>40</height>
                      </size>
                     </property>
-                   </spacer>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="gimbalRightButton">
@@ -511,26 +603,54 @@ background-color: rgb(47, 47, 47);</string>
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="text">
-                     <string>→</string>
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/向右.jpg</normaloff>:/image/icon/向右.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <spacer name="verticalSpacer_4">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
+                   <widget class="QPushButton" name="gimbalDownRightButton">
+                    <property name="minimumSize">
                      <size>
-                      <width>20</width>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>60</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/右下.jpg</normaloff>:/image/icon/右下.jpg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>40</width>
                       <height>40</height>
                      </size>
                     </property>
-                   </spacer>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -579,7 +699,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>焦距</string>
@@ -588,6 +708,10 @@ background-color: rgb(30, 30, 30);</string>
            </item>
            <item>
             <widget class="QFrame" name="ZoomArea">
+             <property name="styleSheet">
+              <string>color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+             </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
@@ -644,7 +768,7 @@ background-color: rgb(30, 30, 30);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="text">
                    <string>+</string>
@@ -685,7 +809,7 @@ background-color: rgb(47, 47, 47);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="text">
                    <string>聚焦</string>
@@ -726,7 +850,7 @@ background-color: rgb(47, 47, 47);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="text">
                    <string>-</string>
@@ -747,6 +871,24 @@ background-color: rgb(47, 47, 47);</string>
                  </spacer>
                 </item>
                </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="zoomLabel_2">
+                <property name="text">
+                 <string>0.5x</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSlider" name="zoomSlider">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(50, 50, 50);</string>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
               </item>
               <item>
                <spacer name="verticalSpacer_8">
@@ -820,7 +962,8 @@ background-color: rgb(47, 47, 47);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(47, 47, 47);</string>
+            <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(30, 30,30);</string>
            </property>
            <property name="text">
             <string>一键选人</string>
@@ -864,7 +1007,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>自动跟踪</string>
@@ -892,7 +1035,7 @@ background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30,30, 30);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -938,7 +1081,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>横竖屏切换</string>
@@ -966,7 +1109,7 @@ background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
               <string>横屏</string>
@@ -1012,7 +1155,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>手势控制</string>
@@ -1040,7 +1183,7 @@ background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -1086,7 +1229,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>自动变焦</string>
@@ -1114,7 +1257,7 @@ background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -1160,7 +1303,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>白平衡</string>
@@ -1189,7 +1332,10 @@ background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30, 30);</string>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
              </property>
              <item>
               <property name="text">
@@ -1257,7 +1403,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>曝光模式</string>
@@ -1284,9 +1430,15 @@ background-color: rgb(30, 30, 30);</string>
                <pointsize>9</pointsize>
               </font>
              </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30, 30);</string>
+             </property>
+             <property name="maxVisibleItems">
+              <number>6</number>
              </property>
              <item>
               <property name="text">
@@ -1344,7 +1496,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>ISO</string>
@@ -1373,7 +1525,7 @@ background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30, 30);</string>
              </property>
              <item>
               <property name="text">
@@ -1451,7 +1603,7 @@ background-color: rgb(47, 47, 47);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="text">
               <string>UVC</string>
@@ -1479,7 +1631,7 @@ background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+background-color: rgb(30, 30, 30);</string>
              </property>
              <property name="text">
               <string>打开</string>
@@ -1526,7 +1678,7 @@ background-color: rgb(47, 47, 47);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1920</width>
+     <width>899</width>
      <height>25</height>
     </rect>
    </property>
@@ -1739,6 +1891,8 @@ background-color: rgb(47, 47, 47);</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

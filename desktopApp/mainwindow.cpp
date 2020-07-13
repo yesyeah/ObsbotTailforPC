@@ -55,6 +55,23 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
         ui->objectDefaultViewButton->setText("竖屏");
     }
 
+    ui->zoomAddButton->setDisabled(true);
+    ui->zoomAddButton->setVisible(false);
+    ui->zoomReduceButton->setDisabled(true);
+    ui->zoomReduceButton->setVisible(false);
+    ui->zoomButton->setDisabled(true);
+    ui->zoomButton->setVisible(false);
+
+    currentZoomValue = handle->GetCurrentZoom();
+
+    ui->zoomLabel_2->setText(QString::fromStdString(std::to_string(currentZoomValue)+"x"));
+
+    ui->zoomSlider->setMinimum(0);
+    ui->zoomSlider->setMaximum(8);
+    ui->zoomSlider->setSingleStep(1);
+    ui->zoomSlider->setTickPosition(QSlider::TicksBelow);
+    ui->zoomSlider->setTickInterval(1);
+    ui->zoomSlider->setValue(currentZoomValue/0.5 -2);
    // showPresetLocation();
 }
 
@@ -166,7 +183,7 @@ void MainWindow::on_gimbalRightButton_clicked()
 {
     handle->CameraDirectionSet(-5, 0);
 }
-
+/*
 void MainWindow::on_zoomAddButton_clicked()
 {
     handle->CameraZoomSet(500);
@@ -176,7 +193,7 @@ void MainWindow::on_zoomReduceButton_clicked()
 {
     handle->CameraZoomSet(-500);
 }
-
+*/
 void MainWindow::on_autoTrackingButton_clicked()
 {
     bool trackingStatus = handle->AITrackingGet();
@@ -272,4 +289,42 @@ void MainWindow::on_isoComboBox_currentIndexChanged(const QString &arg1){
 void MainWindow::on_pushButton_clicked(){
     handle->TargetSelect();
     std::cout<<"target select"<<std::endl;
+}
+
+void MainWindow::on_gimbalUpLeftButton_clicked(){
+     handle->CameraDirectionSet(5, -3);
+}
+
+void MainWindow::on_gimbalUpRightButton_clicked(){
+     handle->CameraDirectionSet(-5, -3);
+}
+
+void MainWindow::on_gimbalDownLeftButton_clicked(){
+    handle->CameraDirectionSet(5, 3);
+}
+
+void MainWindow::on_gimbalDownRightButton_clicked(){
+    handle->CameraDirectionSet(-5, 3);
+}
+
+void MainWindow::on_zoomSlider_sliderReleased(){
+    //1000-1x   1500-1.5x   2000-2x    5000-5
+    handle->CameraZoomSet(currentZoomValue*1000);
+
+    std::cout<<"zoom slider released, set zoom "<< currentZoomValue<<std::endl;
+}
+
+void MainWindow::on_zoomSlider_sliderPressed(){
+    handle->CameraZoomSet(currentZoomValue*1000);
+
+    std::cout<<"zoom slider pressed"<<std::endl;
+}
+
+void MainWindow::on_zoomSlider_sliderMoved(int position){
+    currentZoomValue = 0.5*position+1;
+
+    std::string currentZoom = std::to_string(currentZoomValue)+"x";
+    ui->zoomLabel_2->setText(QString::fromStdString(currentZoom));
+    std::cout<<"zoom slider moved position "<<position<<std::endl;
+
 }

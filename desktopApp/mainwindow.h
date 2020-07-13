@@ -51,9 +51,9 @@ private slots:
 
     void on_gimbalRightButton_clicked();
 
-    void on_zoomAddButton_clicked();
+    //void on_zoomAddButton_clicked();
 
-    void on_zoomReduceButton_clicked();
+    //void on_zoomReduceButton_clicked();
 
     void on_autoTrackingButton_clicked();
 
@@ -69,9 +69,25 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_gimbalUpLeftButton_clicked();
+
+    void on_gimbalUpRightButton_clicked();
+
+    void on_gimbalDownLeftButton_clicked();
+
+    void on_gimbalDownRightButton_clicked();
+
+    void on_zoomSlider_sliderReleased();
+
+    void on_zoomSlider_sliderPressed();
+
+    void on_zoomSlider_sliderMoved(int position);
+
 private:
     Ui::MainWindow *ui;
     SwitchButton aiTrackButtion;
     std::shared_ptr<CameraControl> handle;
+
+    float currentZoomValue;
 };
 #endif // MAINWINDOW_H

@@ -84,7 +84,7 @@ public:
     bool CameraZoomSet(int pos);                                     //调焦，变焦（自动 手动）
     bool CameraZoomGet();
     bool CameraZoomTigger();
-    int GetCurrentZoom();
+    float GetCurrentZoom();
     int GetCurrentZoomSpeed();
     std::string GetAbsZoom();
 
