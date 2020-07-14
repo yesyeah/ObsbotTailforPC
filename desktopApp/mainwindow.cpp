@@ -32,6 +32,7 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
 
     if (handle->AITrackingGet()){
         ui->autoTrackingButton->setText("打开");
+        //ui->autoTrackingButton->setIcon("image/on.ico");
         ui->pushButton->setEnabled(true);
         std::cout<<"auto tracking is  on "<<std::endl;
     } else {
@@ -72,7 +73,10 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
     ui->zoomSlider->setTickPosition(QSlider::TicksBelow);
     ui->zoomSlider->setTickInterval(1);
     ui->zoomSlider->setValue(currentZoomValue/0.5 -2);
-   // showPresetLocation();
+
+    //ui->exposeComboBox->setEditable(false);
+
+    // showPresetLocation();
 }
 
 void MainWindow::setCommandHandle(std::shared_ptr<CameraControl> camera){

@@ -257,19 +257,6 @@ background-color: rgb(0, 0, 0);</string>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_2">
                 <item>
-                 <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>60</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
                  <layout class="QVBoxLayout" name="verticalLayout_4">
                   <item>
                    <widget class="QPushButton" name="gimbalUpLeftButton">
@@ -293,12 +280,12 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/左上.jpg</normaloff>:/image/icon/左上.jpg</iconset>
+                      <normaloff>:/image/icon/106.png</normaloff>:/image/icon/106.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>40</width>
-                      <height>40</height>
+                      <width>50</width>
+                      <height>50</height>
                      </size>
                     </property>
                    </widget>
@@ -333,7 +320,7 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/向左.jpg</normaloff>:/image/icon/向左.jpg</iconset>
+                      <normaloff>:/image/icon/103.png</normaloff>:/image/icon/103.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -368,12 +355,12 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/左下.jpg</normaloff>:/image/icon/左下.jpg</iconset>
+                      <normaloff>:/image/icon/107.png</normaloff>:/image/icon/107.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>40</width>
-                      <height>40</height>
+                      <width>50</width>
+                      <height>50</height>
                      </size>
                     </property>
                    </widget>
@@ -381,7 +368,7 @@ background-color: rgb(0, 0, 0);</string>
                  </layout>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_9">
+                 <spacer name="horizontalSpacer_18">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -422,7 +409,7 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/向上.jpg</normaloff>:/image/icon/向上.jpg</iconset>
+                      <normaloff>:/image/icon/100.png</normaloff>:/image/icon/100.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -431,6 +418,19 @@ background-color: rgb(0, 0, 0);</string>
                      </size>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                   <item>
                    <spacer name="verticalSpacer_11">
@@ -492,6 +492,19 @@ background-color: rgb(0, 0, 0);</string>
                    </spacer>
                   </item>
                   <item>
+                   <spacer name="verticalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="gimbalDownButton">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -524,7 +537,7 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/向下.jpg</normaloff>:/image/icon/向下.jpg</iconset>
+                      <normaloff>:/image/icon/102.png</normaloff>:/image/icon/102.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -573,12 +586,12 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/右上.jpg</normaloff>:/image/icon/右上.jpg</iconset>
+                      <normaloff>:/image/icon/104.png</normaloff>:/image/icon/104.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>40</width>
-                      <height>40</height>
+                      <width>50</width>
+                      <height>50</height>
                      </size>
                     </property>
                    </widget>
@@ -610,7 +623,7 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/向右.jpg</normaloff>:/image/icon/向右.jpg</iconset>
+                      <normaloff>:/image/icon/101.png</normaloff>:/image/icon/101.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -642,30 +655,17 @@ background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/image/icon/右下.jpg</normaloff>:/image/icon/右下.jpg</iconset>
+                      <normaloff>:/image/icon/105.png</normaloff>:/image/icon/105.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>40</width>
-                      <height>40</height>
+                      <width>50</width>
+                      <height>50</height>
                      </size>
                     </property>
                    </widget>
                   </item>
                  </layout>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_2">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>60</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                </layout>
               </item>
@@ -945,14 +945,14 @@ background-color: rgb(50, 50, 50);</string>
           <widget class="QPushButton" name="pushButton">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>30</height>
+             <width>40</width>
+             <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>30</height>
+             <width>40</width>
+             <height>40</height>
             </size>
            </property>
            <property name="sizeIncrement">
@@ -963,10 +963,34 @@ background-color: rgb(50, 50, 50);</string>
            </property>
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30,30);</string>
+background-color: rgba(0, 0, 0, 0);
+background-color: rgba(255, 255, 255, 0);</string>
            </property>
            <property name="text">
-            <string>一键选人</string>
+            <string> </string>
+           </property>
+           <property name="icon">
+            <iconset resource="resource.qrc">
+             <normaloff>:/image/icon/019lock.png</normaloff>:/image/icon/019lock.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string> 选人</string>
            </property>
           </widget>
          </item>
@@ -1035,10 +1059,20 @@ background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30,30, 30);</string>
+background-color: rgba(255,255, 255,0);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -1183,10 +1217,20 @@ background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgba(255, 255, 255,0);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -1257,10 +1301,20 @@ background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgba(255, 255, 255,0);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -1631,10 +1685,20 @@ background-color: rgb(0, 0, 0);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30, 30);</string>
+background-color: rgba(255, 255, 255,0);</string>
              </property>
              <property name="text">
-              <string>打开</string>
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resource.qrc">
+               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>50</width>
+               <height>50</height>
+              </size>
              </property>
             </widget>
            </item>

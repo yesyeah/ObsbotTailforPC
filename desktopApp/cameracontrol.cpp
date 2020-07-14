@@ -539,6 +539,7 @@ bool  CameraControl::CameraZoomGet(){
 }
 
 float CameraControl::GetCurrentZoom(){
+    CameraZoomGet();
     if (currentZoomPos < 1250){
         return 1.0;
     }else if (currentZoomPos < 1750){

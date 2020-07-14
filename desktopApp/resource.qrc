@@ -8,5 +8,16 @@
         <file>icon/右下.jpg</file>
         <file>icon/左上.jpg</file>
         <file>icon/左下.jpg</file>
+        <file>icon/100.png</file>
+        <file>icon/101.png</file>
+        <file>icon/102.png</file>
+        <file>icon/103.png</file>
+        <file>icon/104.png</file>
+        <file>icon/105.png</file>
+        <file>icon/106.png</file>
+        <file>icon/107.png</file>
+        <file>icon/019lock.png</file>
+        <file>icon/off.png</file>
+        <file>icon/on.png</file>
     </qresource>
 </RCC>
