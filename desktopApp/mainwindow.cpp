@@ -23,26 +23,33 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
         ui->zoomReduceButton->setEnabled(false);
         ui->zoomButton->setEnabled(false);
         ui->autoZoomButton->setText("打开");
+        ui->autoZoomButton->setIcon(QIcon(":/image/icon/on2.png"));
+
     } else {
         ui->zoomAddButton->setEnabled(true);
         ui->zoomReduceButton->setEnabled(true);
         ui->zoomButton->setEnabled(true);
         ui->autoZoomButton->setText("关闭");
+        ui->autoZoomButton->setIcon(QIcon(":/image/icon/off2.png"));
     }
 
     if (handle->AITrackingGet()){
         ui->autoTrackingButton->setText("打开");
-        //ui->autoTrackingButton->setIcon("image/on.ico");
+        ui->autoTrackingButton->setIcon(QIcon(":/image/icon/on2.png"));
         ui->pushButton->setEnabled(true);
         std::cout<<"auto tracking is  on "<<std::endl;
     } else {
         ui->autoTrackingButton->setText("关闭");
+        ui->autoTrackingButton->setIcon(QIcon(":/image/icon/off2.png"));
         ui->pushButton->setEnabled(false);
         std::cout<<"auto tracking is  off "<<std::endl;
     }
     if (handle->AIHandposeGet()){
+        ui->handPoseButton->setIcon(QIcon(":/image/icon/on2.png"));
         ui->handPoseButton->setText("打开");
+
     } else {
+        ui->handPoseButton->setIcon(QIcon(":/image/icon/off2.png"));
         ui->handPoseButton->setText("关闭");
     }
 
@@ -202,10 +209,12 @@ void MainWindow::on_autoTrackingButton_clicked()
 {
     bool trackingStatus = handle->AITrackingGet();
     if (!trackingStatus){
+        ui->autoTrackingButton->setIcon(QIcon(":/image/icon/on2.png"));
         ui->autoTrackingButton->setText("打开");
         ui->pushButton->setEnabled(true);
         std::cout<<"auto tracking is  on "<<std::endl;
     } else {
+        ui->autoTrackingButton->setIcon(QIcon(":/image/icon/off2.png"));
         ui->autoTrackingButton->setText("关闭");
         ui->pushButton->setEnabled(false);
 
@@ -219,10 +228,12 @@ void MainWindow::on_handPoseButton_clicked()
 {
     bool handPoseStatus = !handle->AIHandposeGet();
     if (handPoseStatus){
+        ui->handPoseButton->setIcon(QIcon(":/image/icon/on2.png"));
         ui->handPoseButton->setText("打开");
         std::cout<<"hand pose is  on "<<std::endl;
 
     } else {
+        ui->handPoseButton->setIcon(QIcon(":/image/icon/off2.png"));
         ui->handPoseButton->setText("关闭");
         std::cout<<"hande pose is  off "<<std::endl;
 
@@ -239,6 +250,8 @@ void MainWindow::on_autoZoomButton_clicked()
         ui->zoomReduceButton->setEnabled(false);
         ui->zoomButton->setEnabled(false);
         ui->autoZoomButton->setText("打开");
+        ui->autoZoomButton->setIcon(QIcon(":/image/icon/on2.png"));
+
         std::cout<<"auto zomm is  on "<<std::endl;
 
     } else {
@@ -248,6 +261,7 @@ void MainWindow::on_autoZoomButton_clicked()
         ui->zoomButton->setEnabled(true);
         std::cout<<"auto zoom is  off "<<std::endl;
         ui->autoZoomButton->setText("关闭");
+        ui->autoZoomButton->setIcon(QIcon(":/image/icon/off2.png"));
     }
     handle->CameraAutoZoomSet(!currentZoomStatus);
 }

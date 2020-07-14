@@ -1,13 +1,5 @@
 <RCC>
     <qresource prefix="/image">
-        <file>icon/向上.jpg</file>
-        <file>icon/向下.jpg</file>
-        <file>icon/向右.jpg</file>
-        <file>icon/向左.jpg</file>
-        <file>icon/右上.jpg</file>
-        <file>icon/右下.jpg</file>
-        <file>icon/左上.jpg</file>
-        <file>icon/左下.jpg</file>
         <file>icon/100.png</file>
         <file>icon/101.png</file>
         <file>icon/102.png</file>
@@ -17,7 +9,19 @@
         <file>icon/106.png</file>
         <file>icon/107.png</file>
         <file>icon/019lock.png</file>
-        <file>icon/off.png</file>
-        <file>icon/on.png</file>
+        <file>icon/off2.png</file>
+        <file>icon/on2.png</file>
+        <file>icon/autozoom.png</file>
+        <file>icon/expose.png</file>
+        <file>icon/handpose.png</file>
+        <file>icon/iso.png</file>
+        <file>icon/landscape.png</file>
+        <file>icon/poritrait.png</file>
+        <file>icon/reset.png</file>
+        <file>icon/screendirection.png</file>
+        <file>icon/tracking.png</file>
+        <file>icon/uvc.png</file>
+        <file>icon/whitebalance.png</file>
+        <file>icon/gimbal.png</file>
     </qresource>
 </RCC>

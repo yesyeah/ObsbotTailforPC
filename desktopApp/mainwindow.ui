@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>899</width>
-    <height>515</height>
+    <height>569</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -471,10 +471,20 @@ background-color: rgb(0, 0, 0);</string>
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(30, 30, 30);</string>
+                     <string notr="true">background-color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="text">
-                     <string>复位</string>
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/icon/reset.png</normaloff>:/image/icon/reset.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>40</width>
+                      <height>40</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
@@ -967,7 +977,7 @@ background-color: rgba(0, 0, 0, 0);
 background-color: rgba(255, 255, 255, 0);</string>
            </property>
            <property name="text">
-            <string> </string>
+            <string/>
            </property>
            <property name="icon">
             <iconset resource="resource.qrc">
@@ -1042,13 +1052,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QPushButton" name="autoTrackingButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1066,7 +1076,7 @@ background-color: rgba(255,255, 255,0);</string>
              </property>
              <property name="icon">
               <iconset resource="resource.qrc">
-               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+               <normaloff>:/image/icon/on2.png</normaloff>:/image/icon/on2.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1126,13 +1136,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QPushButton" name="objectDefaultViewButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1200,13 +1210,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QPushButton" name="handPoseButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1224,7 +1234,7 @@ background-color: rgba(255, 255, 255,0);</string>
              </property>
              <property name="icon">
               <iconset resource="resource.qrc">
-               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+               <normaloff>:/image/icon/on2.png</normaloff>:/image/icon/on2.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1284,13 +1294,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QPushButton" name="autoZoomButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1308,7 +1318,7 @@ background-color: rgba(255, 255, 255,0);</string>
              </property>
              <property name="icon">
               <iconset resource="resource.qrc">
-               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+               <normaloff>:/image/icon/on2.png</normaloff>:/image/icon/on2.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1368,13 +1378,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QComboBox" name="witheBalanceComboBox">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1468,13 +1478,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QComboBox" name="exposeComboBox">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1561,13 +1571,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QComboBox" name="isoComboBox">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1668,13 +1678,13 @@ background-color: rgb(0, 0, 0);</string>
             <widget class="QPushButton" name="uvcButton">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>85</width>
+               <width>90</width>
                <height>30</height>
               </size>
              </property>
@@ -1692,7 +1702,7 @@ background-color: rgba(255, 255, 255,0);</string>
              </property>
              <property name="icon">
               <iconset resource="resource.qrc">
-               <normaloff>:/image/icon/on.png</normaloff>:/image/icon/on.png</iconset>
+               <normaloff>:/image/icon/on2.png</normaloff>:/image/icon/on2.png</iconset>
              </property>
              <property name="iconSize">
               <size>
