@@ -23,5 +23,6 @@
         <file>icon/uvc.png</file>
         <file>icon/whitebalance.png</file>
         <file>icon/gimbal.png</file>
+        <file>icon/poweronoff.png</file>
     </qresource>
 </RCC>

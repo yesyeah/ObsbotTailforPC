@@ -97,16 +97,16 @@ color: rgb(255, 255, 255);</string>
         <bool>false</bool>
        </property>
        <property name="currentText">
-        <string>AP mode</string>
+        <string>Station mode</string>
        </property>
        <item>
         <property name="text">
-         <string>AP mode</string>
+         <string>Station mode</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Station mode</string>
+         <string>AP mode</string>
         </property>
        </item>
       </widget>
