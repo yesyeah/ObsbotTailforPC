@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "devicelistwindow.h"
+#include "netcfgdialog.h"
 
 namespace Ui {
 class loginWindow;
@@ -21,13 +22,17 @@ private slots:
 
     void on_deviceSearchButton_clicked();
 
+    void on_cameraNetCfgButton_clicked();
+
 private:
     Ui::loginWindow *ui;
     MainWindow* masterPage;
+    NetCfgDialog* netCfgDialog;
 
     std::shared_ptr<CameraControl> handle;
     devicelistwindow* devicelistWindow;
 
 };
+
 
 #endif // LOGINWINDOW_H

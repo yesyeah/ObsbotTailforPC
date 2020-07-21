@@ -9,12 +9,14 @@ loginWindow::loginWindow(QWidget *parent) :
     ui->setupUi(this);
     devicelistWindow = new devicelistwindow();
     masterPage = new MainWindow();
+    netCfgDialog = new NetCfgDialog();
 
 }
 
 loginWindow::~loginWindow()
 {
     delete ui;
+    delete netCfgDialog;
     delete devicelistWindow;
     delete masterPage;
 }
@@ -31,17 +33,30 @@ void loginWindow::on_deviceSearchButton_clicked()
     std::string currentConnectMode = ui->connectComboBox->currentText().toStdString();
     if (std::strncmp(currentConnectMode.c_str(), "AP mode", 7) == 0){
         handle->SetCameraIP(handle->GetCameraDefaultIP());
-        handle->init();
+        if (!handle->isInited()){
+            handle->init();
+        }
         masterPage->init(handle);
         masterPage->show();
         this->hide();
         std::cout<<"ap mode connected"<<std::endl;
     } else {
-        std::cout<<"station mode connected"<<std::endl;
+        std::cout<<"station mode connected, handle is init "<< handle->isInited()<<std::endl;
         devicelistWindow->show();
         this->hide();
+        if (!handle->isInited()){
+            handle->init();
+        }
         std::vector<std::string> device_addr = handle->DeviceSearch();
         devicelistWindow->deviceListShow(device_addr);
     }
 }
 
+void loginWindow::on_cameraNetCfgButton_clicked(){
+    handle->SetCameraIP(handle->GetCameraDefaultIP());
+    handle->init();
+    netCfgDialog->setCommandHandle(handle);
+    netCfgDialog->show();
+    //this->hide();
+    //handle->WifiStatusSet(false);
+}

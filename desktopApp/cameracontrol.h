@@ -48,6 +48,7 @@ public:
     CameraControl();
     ~CameraControl(){
         curlHandle = nullptr;
+        hasInitAlready = false;
     }
 
     void init();
@@ -55,8 +56,10 @@ public:
     bool cameraInit();
     bool paramUpdate();
 
+    bool isInited();
+
     bool WifiStatusGet();
-    bool WifiStatusSet(bool is_ap_mode);
+    bool WifiStatusSet(bool is_ap_mode, std::string wifi, std::string pwd);
     bool WifiInfoSet(std::string ssid, std::string pwd);
 
     std::vector<std::string> DeviceSearch();
@@ -119,6 +122,7 @@ private:
     std::string cameraIP;
     std::string cameraDefaultIP;
     std::string curlHead;
+    bool hasInitAlready;
 
     std::string cameraConctrlAddr;
     std::string aiConctrlAddr;

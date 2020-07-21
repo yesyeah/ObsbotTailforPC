@@ -252,7 +252,7 @@ void MainWindow::on_autoZoomButton_clicked()
         ui->autoZoomButton->setText("打开");
         ui->autoZoomButton->setIcon(QIcon(":/image/icon/on2.png"));
 
-        std::cout<<"auto zomm is  on "<<std::endl;
+        std::cout<<"auto zoom is  on "<<std::endl;
 
     } else {
         //enable hand zoom
@@ -267,7 +267,6 @@ void MainWindow::on_autoZoomButton_clicked()
 }
 
 void MainWindow::on_uvcButton_clicked(){
-
 
 }
 

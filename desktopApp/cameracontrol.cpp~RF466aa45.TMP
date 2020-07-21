@@ -78,7 +78,7 @@ bool CameraControl::GetLocalIP(){
         }
         for (DWORD i = 0; i < pIpAdapterInfo->AddressLength; i++){
             if (i < pIpAdapterInfo->AddressLength - 1){
-                printf("%02X-\n", pIpAdapterInfo->Address[i]);
+                printf("%02X-", pIpAdapterInfo->Address[i]);
             }else{
                 printf("%02X\n", pIpAdapterInfo->Address[i]);
             }
@@ -86,14 +86,14 @@ bool CameraControl::GetLocalIP(){
             IP_ADDR_STRING *pIpAddrString = &(pIpAdapterInfo->IpAddressList);
             do{
                 localIP = pIpAddrString->IpAddress.String;
-                //if (std::strcmp(localIP.c_str(), "0.0.0.0") != 0){
+                if (std::strcmp(localIP.c_str(), "0.0.0.0") != 0){
                     cout << "IP:" << pIpAddrString->IpAddress.String << endl;
                     cout << "netmask:" << pIpAddrString->IpMask.String << endl;
                     cout << "gateway:" << pIpAdapterInfo->GatewayList.IpAddress.String << endl;
 
-                    std::cout<<"local ip  is "<<localIP<<std::endl;
+                    std::cout<<"local ip "<< " is "<<localIP<<std::endl;
                     return true;
-                //}
+                }
                 pIpAddrString = pIpAddrString->Next;
             } while (pIpAddrString);
 
@@ -241,7 +241,7 @@ std::vector<std::string> CameraControl::DeviceSearch(){
     PingReply reply;
     std::string testIP;
     std::string preIP = localIP.substr(0, localIP.rfind(".")+1);
-    std::cout<<localIP<<" is local ip"<<std::endl;
+    std::cout<<localIP<<" is local up"<<std::endl;
 
     double time_start = GetTickCount();
     std::vector<std::string> addr_list;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>欢迎使用Obsbot寻影相机</string>
+   <string>欢迎使用CECV相机控制平台</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -27,8 +27,8 @@
    <widget class="QPushButton" name="deviceSearchButton">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>160</y>
+      <x>190</x>
+      <y>130</y>
       <width>100</width>
       <height>40</height>
      </rect>
@@ -57,7 +57,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>50</y>
+      <y>20</y>
       <width>211</width>
       <height>91</height>
      </rect>
@@ -112,6 +112,56 @@ color: rgb(255, 255, 255);</string>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="cameraNetCfgButton">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>130</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Adobe Arabic</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(30, 30, 30);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>相机配网</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>371</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(150, 150, 150);</string>
+    </property>
+    <property name="text">
+     <string>通过station模式连接相机前，请先用电脑网络连接到设备热点，再通过相机配网，将相机连接到路由器WiFi，最后将电脑也连入路由器网络</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

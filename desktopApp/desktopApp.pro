@@ -31,6 +31,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    netcfgdialog.cpp \
     remoservice.cpp \
     switchbutton.cpp \
     utils.cpp
@@ -42,6 +43,7 @@ HEADERS += \
     cameracontrol.h \
     loginwindow.h \
     mainwindow.h \
+    netcfgdialog.h \
     remoprotocolutils.h \
     remoservice.h \
     switchbutton.h \
@@ -50,7 +52,8 @@ HEADERS += \
 FORMS += \
     devicelistwindow.ui \
     loginwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    netcfgdialog.ui
 
 TRANSLATIONS += \
     desktopApp_zh_CN.ts

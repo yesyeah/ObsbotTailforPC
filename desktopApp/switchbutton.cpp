@@ -67,8 +67,7 @@ void SwitchButton::mousePressEvent(QMouseEvent *)
     timer->start();
 }
 
-void SwitchButton::resizeEvent(QResizeEvent *)
-{
+void SwitchButton::resizeEvent(QResizeEvent *){
     //每次移动的步长为宽度的 50分之一
     step = width() / 50;
 
@@ -88,8 +87,7 @@ void SwitchButton::resizeEvent(QResizeEvent *)
     update();
 }
 
-void SwitchButton::paintEvent(QPaintEvent *)
-{
+void SwitchButton::paintEvent(QPaintEvent *){
     //绘制准备工作,启用反锯齿
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -107,8 +105,7 @@ void SwitchButton::paintEvent(QPaintEvent *)
     //}
 }
 
-void SwitchButton::drawBg(QPainter *painter)
-{
+void SwitchButton::drawBg(QPainter *painter){
     painter->save();
     painter->setPen(Qt::NoPen);
 
