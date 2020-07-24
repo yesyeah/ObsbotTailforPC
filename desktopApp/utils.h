@@ -73,7 +73,7 @@ public:
     static void InvertUint8(unsigned char *dBuf,unsigned char *srcBuf);
     static void InvertUint16(unsigned short *dBuf,unsigned short *srcBuf);
     static void InvertUint32(unsigned int *dBuf,unsigned int *srcBuf);
-    static unsigned short CRC16_USB(unsigned char *data, unsigned int datalen);
+    static unsigned short CRC16_USB( char *data, unsigned int datalen);
 
     static std::string string_To_UTF8(const std::string & str);
     static QString GBK2UTF8(const QString &str);

@@ -6,7 +6,7 @@ void InvertUint16(unsigned short *dBuf,unsigned short *srcBuf);
 void InvertUint32(unsigned int *dBuf,unsigned int *srcBuf);
 unsigned short CRC16_USB(unsigned char *data, unsigned int datalen);
 
-enum CameraCommand{
+enum MainCommand{
     ParamGet = 0x0,
     ParamSet = 0x1,
     ParamSupport = 0x2,
@@ -32,7 +32,20 @@ enum CameraDescription{
     ExposureCompensationCur = 0x73,
     ZoomMode = 0x77,
     Zoom = 0x7c,
-    UsbMode = 0x76,
+    //UsbMode = 0x76,
+    UsbMode = 0xf6,
+    Poweroff = 0x1c2,
+};
+
+enum CommandSet{
+    GeneralSet = 0,
+    CameraSet,
+    GimbalSet,
+    AlgorithmSet,
+    BatterySet,
+    ActiveSet,
+    FactorySet,
+    UpdateSet,
 };
 
 enum Terminal{
@@ -42,6 +55,8 @@ enum Terminal{
     Battery,
     App,
     Pc,
+    Device,
+    Brocast = 0xf,
 };
 
 
@@ -55,13 +70,19 @@ enum BatteryCommand{
 
 };
 
-enum ExposureType{
+enum WhiteBalanceMode{
     AUTO = 0,
     INCANDESCENT = 1,
     FLUORESCENT = 2,
     SUNNY =3,
     WINDY = 4,
     CUSTOM = 5,
+};
+
+enum ExposureMode{
+    P = 0,
+    S,
+    M,
 };
 
 enum AFMode{
@@ -74,6 +95,23 @@ enum UsbMode{
     NET = 0,
     UDisk
 };
+
+/*enum ISOValue{
+    ISO_100 = 0,
+    ISO_200,
+    ISO_400,
+    ISO_800,
+    ISO_1600,
+    ISO_3200,
+    ISO_6400,
+    ISO_12800,
+    ISO_25600,
+};*/
+/*
+std::map<int,  int> ISOValue{
+    {100, 0}, {200, 1}, {400, 2}, {800, 3}, {1600, 4}, {3200, 5}, {6400, 6},
+    {12800, 7}, {25600, 8}
+};*/
 
 //0-   1/8000      1-   1/6400      2-  1/5000   3-  1/4000   4-  1/3200
 //5-   1/2500      6-   1/2000      7-  1/1600   8-  1/1250   9-  1/1000

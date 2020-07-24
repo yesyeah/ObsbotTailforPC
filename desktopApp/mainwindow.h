@@ -6,7 +6,6 @@
 #include <QStandardItemModel>
 #include <QModelIndex>
 #include "cameracontrol.h"
-#include "switchbutton.h"
 #include "utils.h"
 
 QT_BEGIN_NAMESPACE
@@ -26,6 +25,7 @@ public:
 
     QStringListModel *Model;
     QStandardItemModel *ItemModel;
+
 private slots:
     void triggerPresetLocation(QModelIndex id);
 
@@ -41,8 +41,6 @@ private slots:
 
     void on_gimbalResetButton_clicked();
 
-    void on_zoomButton_clicked();
-
     void on_gimbalUpButton_clicked();
 
     void on_gimbalLeftButton_clicked();
@@ -51,9 +49,6 @@ private slots:
 
     void on_gimbalRightButton_clicked();
 
-    //void on_zoomAddButton_clicked();
-
-    //void on_zoomReduceButton_clicked();
 
     void on_autoTrackingButton_clicked();
 
@@ -64,8 +59,6 @@ private slots:
     void on_uvcButton_clicked();
 
     void on_objectDefaultViewButton_clicked();
-
-
 
     void on_pushButton_clicked();
 
@@ -83,9 +76,10 @@ private slots:
 
     void on_zoomSlider_sliderMoved(int position);
 
+    void on_powerOffButton_clicked();
+
 private:
     Ui::MainWindow *ui;
-    SwitchButton aiTrackButtion;
     std::shared_ptr<CameraControl> handle;
 
     float currentZoomValue;

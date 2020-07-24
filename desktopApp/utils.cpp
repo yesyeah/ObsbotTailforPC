@@ -96,7 +96,7 @@ void Util::InvertUint32(unsigned int *dBuf,unsigned int *srcBuf){
 
 }
 
-unsigned short Util::CRC16_USB(unsigned char *data, unsigned int datalen){
+unsigned short Util::CRC16_USB(char *data, unsigned int datalen){
     unsigned short wCRCin = 0xFFFF;
     unsigned short wCPoly = 0x8005;
 

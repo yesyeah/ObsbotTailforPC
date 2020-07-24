@@ -640,48 +640,32 @@ bool CameraControl::TargetSelect(){
     return true;
 }
 
-bool CameraControl::CameraUVCModeCtl(bool on){
-    remoHandle.UsbModeSet(on);
+bool CameraControl::CameraUVCModeCtl(bool on)
+
+Remo_Camera_WhiteBalance_S CameraControl::CameraWhiteBalanceGet(){
+
+}
+
+bool CameraControl::CameraWhiteBalanceSet(Remo_Camera_WhiteBalance_s value){
+
+}
+
+Remo_Camera_ISO_s CameraControl::CameraISOGet(){
+}
+
+bool CameraControl::CameraISOSet(Remo_Camera_ISO_s value){
     return true;
 }
 
-bool CameraControl::CameraUVCModeGet(){
-    if (remoHandle.UsbModeGet() == UsbMode::NET){
-        return true;
-    }else{
-        return false;
-    }
+Remo_Camera_AeMode_s CameraControl::CameraExposeGet(){
+
 }
 
-int CameraControl::CameraWhiteBalanceGet(){
-    return remoHandle.WhiteBalanceGet();
-    //return true;
-}
-
-bool CameraControl::CameraWhiteBalanceSet(int value){
-    remoHandle.WhiteBalanceSet(value);
-    return true;
-}
-
-int CameraControl::CameraISOGet(){
-    return remoHandle.IsoCurGet();
-}
-
-bool CameraControl::CameraISOSet(int value){
-    remoHandle.IsoMSet(value);
-    return true;
-}
-
-int CameraControl::CameraExposeGet(){
-    return remoHandle.ExposureCurGet();
-}
-
-bool CameraControl::CameraExposeSet(int value){
-    remoHandle.ExposureModeSet(value);
+bool CameraControl::CameraExposeSet(Remo_Camera_AeMode_s value){
     return true;
 }
 
 bool CameraControl::CameraPoweroff(){
-    remoHandle.PowerOff();
+
     return true;
 }

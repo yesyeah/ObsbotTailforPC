@@ -9,7 +9,7 @@ using namespace std;
 RemoService::RemoService(){
     packSeq = 0;
     WSADATA wsaData;
-    WORD wVersionRequested = MAKEWORD( 1, 1 );
+    WORD wVersionRequested = MAKEWORD( 2, 2 );
     int errNo = WSAStartup( wVersionRequested, &wsaData );
     if ( errNo != 0 ) {
         std::cout<<"error while create remo service"<<std::endl;
@@ -41,11 +41,6 @@ bool RemoService::ApertureMSet(){
 }
 
 bool RemoService::init(){
-    sockClient = socket(AF_INET, SOCK_DGRAM, 0);
-
-    addrClient.sin_addr.S_un.S_addr = inet_addr(REMO_PROCOTOL_ADDRESS);
-    addrClient.sin_family = AF_INET;
-    addrClient.sin_port = htons(REMO_PROCOTOL_PORT);
 
     //char recvBuf[100];
     //char sendBuf[100];
@@ -64,7 +59,7 @@ bool RemoService::communicateInit(){
 
 }
 
-unsigned char* RemoService::dataPack(char command, unsigned short description, char receiver){
+char* RemoService::dataPack(char data, unsigned short command, char receiver){
     /*package description
       sync head  -   8bit
       version    -   4bit
@@ -78,7 +73,7 @@ unsigned char* RemoService::dataPack(char command, unsigned short description, c
       commandset -   4bit
       commandid  -   12bit
     */
-    unsigned char* communicationData = new unsigned char(REMO_PACK_LEN);
+    char* communicationData = new  char(REMO_PACK_LEN);
     memset(communicationData, 0 , REMO_PACK_LEN);
 
     unsigned short frameLen = 0x0;   //dataLen   no data
@@ -110,8 +105,8 @@ unsigned char* RemoService::dataPack(char command, unsigned short description, c
     std::bitset<12> commandID = description & 0x0fff;*/
     communicationData[8] = checkBit;                    //pack head checkbit
     communicationData[9] = (Terminal::Pc & 0xff) < 4  || (receiver & 0xff);
-    communicationData[10] = (command & 0xff) < 4  || (description & 0xff00) > 8;      //command
-    communicationData[11] = description & 0x00ff;   //description
+    communicationData[10] = (command & 0xffff0000) > 8;      //command
+    communicationData[11] = command & 0xffff;   //description
 
     //headCheckBit = CRC16_USB(communicationData, 12) & 0x00ff;
     communicationData[8] = Util::CRC16_USB(communicationData, 12) & 0x00ff;
@@ -120,6 +115,7 @@ unsigned char* RemoService::dataPack(char command, unsigned short description, c
     communicationData[7] = (checkSum & 0x00ff);
 
     packSeq = packSeq + 1;
+    std::cout<<"data after pack is : "<<communicationData<<std::endl;
     return communicationData;
 }
 
@@ -134,26 +130,55 @@ bool RemoService::dataUnPack(char* data, RemoProcotolHead* response){
 }
 
 bool RemoService::request(char command, unsigned short description, char receiver){
-    unsigned char* sendBuf = dataPack(command, description, receiver);
+    sockClient = socket(AF_INET, SOCK_DGRAM, 0);
 
-    std::cout<<"send buf "<< sendBuf<<std::endl;
-    unsigned char* recvBuf = new unsigned char (2048);
+    addrClient.sin_addr.S_un.S_addr = inet_addr(REMO_PROCOTOL_ADDRESS);
+    addrClient.sin_family = AF_INET;
+    addrClient.sin_port = htons(REMO_PROCOTOL_PORT);
+    int length  = sizeof(addrClient);
 
-    int recv_len = 0;
-   // sendto(sockClient, sendBuf, strlen(sendBuf)+1, 0, (SOCKADDR*)&addrClient, sizeof(SOCKADDR);
-   // recvfrom(sockClient, recvBuf, 100, 0, (SOCKADDR*)&addrClient, &recv_len);
+    char* sendBuf = dataPack(command, description, receiver);
 
+    std::cout<<"send buf "<< sendBuf<<" size: "<< strlen(sendBuf)<<std::endl;
+
+    sendto(sockClient, sendBuf, strlen(sendBuf), 0, (SOCKADDR*)&addrClient, sizeof(SOCKADDR));
+
+    char recvData[255];
+    int ret = recvfrom(sockClient, recvData, 255, 0, (sockaddr *)&addrClient,&length);
+    if(ret > 0) {
+       recvData[ret] = 0x00;
+       std::cout<< recvData<<std::endl;
+    }
+
+    closesocket(sockClient);
+    WSACleanup();
 
     delete  sendBuf;
-    delete  recvBuf;
+}
+
+bool RemoService::receive(){
+
+    return true;
 }
 
 
-bool RemoService::ApertureCurGet(){
+int RemoService::ApertureCurGet(){
 
+}
+
+bool RemoService::ExposureModeSet(unsigned char mode){
+    char data;
+    unsigned short cmd = (1 << 12 )| (1 << 9) | (CameraDescription::Exposure & 0x00ff);
+    char recevier = Terminal::Camera;
+
+    data = mode;
+    std::cout<<"set exposure mode is "<<mode<<std::endl;
+    request(data, cmd, recevier);
+    return true;
 }
 
 bool RemoService::ExposureASet(){
+
 
 }
 
@@ -165,42 +190,74 @@ bool RemoService::ExposureSSet(){
 
 }
 
-bool RemoService::ExposureCurGet(){
+int RemoService::ExposureCurGet(){
+    char data;
+    unsigned short cmd = (1 << 12 )| (0 << 9) | (CameraDescription::Exposure & 0x00ff);
+    char recevier = Terminal::Camera;
+
+    data = 0;
+    request(data, cmd, recevier);
+    return true;
+}
+
+int RemoService::ExposureCompensationCurGet(){
 
 }
 
-bool RemoService::ExposureCompensationCurGet(){
+bool RemoService::IsoMSet(unsigned char value){
+    char data;
+    unsigned short cmd = (1 << 12 )| (1 << 9) | (CameraDescription::IsoM & 0x00ff);
+    char recevier = Terminal::Camera;
 
+    data = value;
+    request(data, cmd, recevier);
+    return true;
 }
 
-bool RemoService::IsoMSet(){
+int RemoService::IsoCurGet(){
+    char data;
+    unsigned short cmd = (1 << 12 )| (0 << 9) | (CameraDescription::IsoCur & 0x00ff);
+    char recevier = Terminal::Camera;
 
-}
-
-bool RemoService::IsoCurGet(){
-
+    data = 0;
+    request(data, cmd, recevier);
+    return true;
 }
 
 bool RemoService::ShutterMSet(){
-
+    return true;
 }
 
 bool RemoService::ShutterSSet(){
+    return true;
 
 }
 
-bool RemoService::ShutterCurGet(){
-
+int RemoService::ShutterCurGet(){
+    return 0;
 }
 
-bool RemoService::WhiteBalanceGet(){
+int RemoService::WhiteBalanceGet(){
+    char data;
+    unsigned short cmd = (1 << 12 )| (0 << 9) | (CameraDescription::WhiteBalance & 0x00ff);
+    char recevier = Terminal::Camera;
 
+    data = 0;
+    request(data, cmd, recevier);
+    return true;
 }
 
-bool RemoService::WhiteBalanceSet(){
+bool RemoService::WhiteBalanceSet(unsigned char mode){
+    char data;
+    unsigned short cmd = (1 << 12 )| (1 << 9) | (CameraDescription::WhiteBalance & 0x00ff);
+    char recevier = Terminal::Camera;
 
+    data = mode;
+    request(data, cmd, recevier);
+    return true;
 }
 
+/*
 bool RemoService::ZoomGet(){
 
 }
@@ -215,6 +272,36 @@ bool RemoService::ZoomModeGet(){
 
 bool RemoService::ZoomModeSet(){
 
+}
+*/
+int RemoService::UsbModeGet(){
+    char data = 0;
+    unsigned short cmd = (1 << 12 )| (0 << 9) | (CameraDescription::Poweroff & 0x0fff);
+    char recevier = Terminal::Camera;
+    request(data, cmd, recevier);
+    return true;
+}
+
+bool RemoService::UsbModeSet(bool uvc_mode){
+    char data;
+    unsigned short cmd = (1 << 12 )| (1 << 9) | (CameraDescription::UsbMode & 0x0fff);
+    char recevier = Terminal::Camera;
+
+    if (uvc_mode){
+        data = UsbMode::NET;
+    } else {
+        data = UsbMode::UDisk;
+    }
+
+    request(data, cmd, recevier);
+    return true;
+}
+
+bool RemoService::PowerOff(){
+    char data = 0;
+    unsigned short cmd = (4 << 12 )| (1 << 9) | (CameraDescription::Poweroff & 0x0fff);
+    char recevier = Terminal::Battery;
+    request(data, cmd, recevier);
 }
 
 

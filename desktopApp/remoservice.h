@@ -43,16 +43,18 @@ public:
 
     bool communicateInit();
 
-    unsigned char* dataPack(char command, unsigned short description, char receiver);
+    char* dataPack(char data, unsigned short command, char receiver);
     bool dataUnPack(char* data, RemoProcotolHead* response);
 
-    bool request(char command, unsigned short description, char receiver);
+    bool request(char data, unsigned short command, char receiver);
+    bool receive();
 
-    bool ExposureCurGet();
-    bool ApertureCurGet();
-    bool ShutterCurGet();
-    bool IsoCurGet();
-    bool ExposureCompensationCurGet();
+    int ExposureCurGet();
+    bool ExposureModeSet(unsigned char mode);
+    int ApertureCurGet();
+    int ShutterCurGet();
+    int IsoCurGet();
+    int ExposureCompensationCurGet();
 
     bool ExposureSSet();
     bool ExposureASet();
@@ -61,22 +63,24 @@ public:
     bool ShutterSSet();
     bool ShutterMSet();
 
-    bool WhiteBalanceSet();
-    bool WhiteBalanceGet();
+    bool WhiteBalanceSet(unsigned char mode);
+    int WhiteBalanceGet();
 
     bool ApertureASet();
     bool ApertureMSet();
 
-    bool IsoMSet();
+    bool IsoMSet(unsigned char value);
 
-    bool ZoomModeSet();
-    bool ZoomModeGet();
+    //bool ZoomModeSet();
+    //bool ZoomModeGet();
 
-    bool ZoomSet();
-    bool ZoomGet();
+    //bool ZoomSet();
+    //bool ZoomGet();
 
-    bool UsbModeSet();
-    bool UsbModeGet();
+    bool UsbModeSet(bool uvc_mode);
+    int UsbModeGet();
+
+    bool PowerOff();
 
 private:
     SOCKET sockClient;

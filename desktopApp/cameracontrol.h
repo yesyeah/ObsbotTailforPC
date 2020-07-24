@@ -91,14 +91,14 @@ public:
     int GetCurrentZoomSpeed();
     std::string GetAbsZoom();
 
-    Remo_Camera_WhiteBalance_S CameraWhiteBalanceGet();
-    bool CameraWhiteBalanceSet(Remo_Camera_WhiteBalance_s value);
+    int CameraWhiteBalanceGet();
+    bool CameraWhiteBalanceSet(int value);
 
-    Remo_Camera_ISO_s CameraISOGet();
-    bool CameraISOSet(Remo_Camera_ISO_s value);
+    int CameraISOGet();
+    bool CameraISOSet(int value);
 
-    Remo_Camera_AeMode_s CameraExposeGet();
-    bool CameraExposeSet(Remo_Camera_AeMode_s value);
+    int CameraExposeGet();
+    bool CameraExposeSet(int value);
 
     bool CameraPoweroff();
 
@@ -108,6 +108,8 @@ public:
 
     bool TargetSelect();
 
+    bool CameraUVCModeCtl(bool on);
+    bool CameraUVCModeGet();
 
 private:
     std::string GetCameraUrl();

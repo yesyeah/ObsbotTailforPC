@@ -19,16 +19,12 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
     handle = camera;
 
     if (handle->CameraAutoZoomGet()){
-        ui->zoomAddButton->setEnabled(false);
-        ui->zoomReduceButton->setEnabled(false);
-        ui->zoomButton->setEnabled(false);
+        ui->zoomSlider->setDisabled(true);
         ui->autoZoomButton->setText("打开");
         ui->autoZoomButton->setIcon(QIcon(":/image/icon/on2.png"));
 
     } else {
-        ui->zoomAddButton->setEnabled(true);
-        ui->zoomReduceButton->setEnabled(true);
-        ui->zoomButton->setEnabled(true);
+        ui->zoomSlider->setDisabled(false);
         ui->autoZoomButton->setText("关闭");
         ui->autoZoomButton->setIcon(QIcon(":/image/icon/off2.png"));
     }
@@ -63,12 +59,19 @@ void MainWindow::init(std::shared_ptr<CameraControl> camera){
         ui->objectDefaultViewButton->setText("竖屏");
     }
 
-    ui->zoomAddButton->setDisabled(true);
-    ui->zoomAddButton->setVisible(false);
-    ui->zoomReduceButton->setDisabled(true);
-    ui->zoomReduceButton->setVisible(false);
-    ui->zoomButton->setDisabled(true);
-    ui->zoomButton->setVisible(false);
+    /*if (handle->CameraUVCModeGet()){
+        ui->uvcButton->setIcon(QIcon(":/image/icon/off2.png"));
+        ui->uvcButton->setText("关闭");
+    }else {
+        ui->uvcButton->setIcon(QIcon(":/image/icon/on2.png"));
+        ui->uvcButton->setText("打开");
+    }
+
+    int value = handle->CameraISOGet();
+    ui->isoComboBox->setCurrentText(QString::fromStdString(std::to_string(value)));
+
+    value = handle->CameraExposeGet();
+    ui->exposeComboBox->setCurrentText(QString::fromStdString(std::to_string(value)));*/
 
     currentZoomValue = handle->GetCurrentZoom();
 
@@ -170,11 +173,6 @@ void MainWindow::on_gimbalResetButton_clicked()
     handle->GimbalLocationReset();
 }
 
-void MainWindow::on_zoomButton_clicked()
-{
-    handle->CameraZoomTigger();
-}
-
 void MainWindow::on_gimbalUpButton_clicked()
 {
     handle->CameraDirectionSet(0, -3);
@@ -217,9 +215,7 @@ void MainWindow::on_autoTrackingButton_clicked()
         ui->autoTrackingButton->setIcon(QIcon(":/image/icon/off2.png"));
         ui->autoTrackingButton->setText("关闭");
         ui->pushButton->setEnabled(false);
-
         std::cout<<"auto tracking is  off "<<std::endl;
-
     }
     handle->AITrackingSet(!trackingStatus);
 }
@@ -246,9 +242,7 @@ void MainWindow::on_autoZoomButton_clicked()
     bool currentZoomStatus = handle->CameraAutoZoomGet();
     if (!currentZoomStatus){
         //auto zoom status disable  handzoom
-        ui->zoomAddButton->setEnabled(false);
-        ui->zoomReduceButton->setEnabled(false);
-        ui->zoomButton->setEnabled(false);
+        ui->zoomSlider->setDisabled(true);
         ui->autoZoomButton->setText("打开");
         ui->autoZoomButton->setIcon(QIcon(":/image/icon/on2.png"));
 
@@ -256,9 +250,7 @@ void MainWindow::on_autoZoomButton_clicked()
 
     } else {
         //enable hand zoom
-        ui->zoomAddButton->setEnabled(true);
-        ui->zoomReduceButton->setEnabled(true);
-        ui->zoomButton->setEnabled(true);
+        ui->zoomSlider->setDisabled(false);
         std::cout<<"auto zoom is  off "<<std::endl;
         ui->autoZoomButton->setText("关闭");
         ui->autoZoomButton->setIcon(QIcon(":/image/icon/off2.png"));
@@ -267,7 +259,16 @@ void MainWindow::on_autoZoomButton_clicked()
 }
 
 void MainWindow::on_uvcButton_clicked(){
+    bool uvc_mode = handle->CameraUVCModeGet();
 
+    if (!uvc_mode){
+        ui->uvcButton->setIcon(QIcon(":/image/icon/off2.png"));
+        ui->uvcButton->setText("关闭");
+    }else {
+        ui->uvcButton->setIcon(QIcon(":/image/icon/on2.png"));
+        ui->uvcButton->setText("打开");
+    }
+    handle->CameraUVCModeCtl(!uvc_mode);
 }
 
 void MainWindow::on_objectDefaultViewButton_clicked(){
@@ -288,18 +289,41 @@ void MainWindow::on_witheBalanceComboBox_currentIndexChanged(const QString &arg1
     std::cout<< "current white balance 0 : "<< ui->witheBalanceComboBox->currentText().toStdString()<<std::endl;
     QString currentWhiteBalance =  Util::GBK2UTF8(ui->witheBalanceComboBox->currentText());
     std::cout<< "current white balance : "<< currentWhiteBalance.toStdString()<<std::endl;
+    ui->witheBalanceComboBox->setCurrentText(ui->witheBalanceComboBox->currentText());
+
+
 }
 
 void MainWindow::on_exposeComboBox_currentIndexChanged(const QString &arg1){
     std::cout<< "current expose  0 : "<< ui->exposeComboBox->currentText().toStdString()<<std::endl;
-    QString currentExpose = Util::GBK2UTF8(ui->exposeComboBox->currentText());
-    std::cout<< "current expose  : "<<currentExpose.toStdString()<<std::endl;
+    std::string currentExpose = Util::GBK2UTF8(ui->exposeComboBox->currentText()).toStdString();
+    std::cout<< "current expose  : "<<currentExpose<<std::endl;
+
+    if (currentExpose == "S"){   //
+        ui->isoComboBox->setDisabled(true);
+        ui->exposeComboBox->setCurrentText("S");
+       // handle->CameraExposeSet(ExposureMode::S);
+
+    } else if (currentExpose == "M"){
+        ui->isoComboBox->setDisabled(false);
+        ui->exposeComboBox->setCurrentText("M");
+        ///handle->CameraExposeSet(ExposureMode::M);
+
+    } else {
+        //auto
+        ui->isoComboBox->setDisabled(true);
+        ui->exposeComboBox->setCurrentText("P");
+     //   handle->CameraExposeSet(ExposureMode::P);
+    }
 }
 
 void MainWindow::on_isoComboBox_currentIndexChanged(const QString &arg1){
-    std::cout<< "current iso  0 : "<< ui->isoComboBox->currentText().toStdString()<<std::endl;
+    int value = std::atoi(ui->isoComboBox->currentText().toStdString().c_str());
+    //std::cout<< "current iso  0 : "<< ISOValue[value]<<std::endl;
     QString currentISO =  Util::GBK2UTF8(ui->isoComboBox->currentText());
     std::cout<< "current iso  : "<<  currentISO.toStdString()<<std::endl;
+    ui->isoComboBox->setCurrentText(ui->isoComboBox->currentText());
+  //  handle->CameraISOSet(ISOValue[value]);
 }
 
 
@@ -344,4 +368,8 @@ void MainWindow::on_zoomSlider_sliderMoved(int position){
     ui->zoomLabel_2->setText(QString::fromStdString(currentZoom));
     std::cout<<"zoom slider moved position "<<position<<std::endl;
 
+}
+
+void MainWindow::on_powerOffButton_clicked(){
+    handle->CameraPoweroff();
 }
