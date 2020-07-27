@@ -399,13 +399,13 @@ std::vector<GimbalPresetLocation> CameraControl::GimbalPresetLocationGet(){
     return locations;
 }
 
-int CameraControl::GimbalPresetLocationAdd(float zoom, float roll, float pitch, float yaw){
+int CameraControl::GimbalPresetLocationAdd(int id, float zoom, float roll, float pitch, float yaw){
     std::string url = aiConctrlAddr + "/obsbot/tail/ai/gimbal";
     std::string res;
 
     json send_msg;
     send_msg["cmd"] = "presetAdd";
-    send_msg["id"] = presetLocationId;
+    send_msg["id"] = id;
     send_msg["roll"] = roll;
     send_msg["pitch"] = pitch;
     send_msg["pan"] = yaw;

@@ -144,7 +144,7 @@ void MainWindow::showPresetLocation(){
 
     for (unsigned long long i  = 0; i < locations.size(); i++){
         std::cout <<"roll:" << locations[i].roll <<" pitch:"<<locations[i].pitch <<" yaw:"<<locations[i].yaw<<std::endl;
-        std::string presetLocationItem = std::to_string(locations[i].id) + ".ratio:" + std::to_string(locations[i].zoom) + " " +
+        std::string presetLocationItem = std::to_string(i+1) + ".ratio:" + std::to_string(locations[i].zoom) + " " +
                                          "roll:" + std::to_string( locations[i].roll) + " " +
                                          "pitch:" + std::to_string(locations[i].pitch) + " " +
                                          "yaw:" + std::to_string(locations[i].yaw) + " ";
@@ -494,6 +494,7 @@ void MainWindow::on_preesetLocationEnable_4_clicked()
 {
     handle->GimbalPresetLocationTigger(4);
 }
+
 
 void MainWindow::on_presetLocationDel_1_clicked()
 {

@@ -78,6 +78,30 @@ private slots:
 
     void on_powerOffButton_clicked();
 
+    void on_presetLocationAddButton_1_clicked();
+
+    void on_preesetLocationEnable_1_clicked();
+
+    void on_presetLocationAddButton_2_clicked();
+
+    void on_preesetLocationEnable_2_clicked();
+
+    void on_presetLocationAddButton_3_clicked();
+
+    void on_preesetLocationEnable_3_clicked();
+
+    void on_presetLocationAddButton_4_clicked();
+
+    void on_preesetLocationEnable_4_clicked();
+
+    void on_presetLocationDel_1_clicked();
+
+    void on_presetLocationDel_2_clicked();
+
+    void on_preesetLocationDel_3_clicked();
+
+    void on_preesetLocationDel_4_clicked();
+
 private:
     Ui::MainWindow *ui;
     std::shared_ptr<CameraControl> handle;

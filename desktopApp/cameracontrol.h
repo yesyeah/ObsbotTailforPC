@@ -71,7 +71,7 @@ public:
     bool GetGimbalLockStatus();                      //云台锁定开关
 
     std::vector<GimbalPresetLocation> GimbalPresetLocationGet();   // 预置位设置
-    int GimbalPresetLocationAdd(float zoom, float roll, float pitch, float yaw);
+    int GimbalPresetLocationAdd(int id, float zoom, float roll, float pitch, float yaw);
     bool GimbalPresetLocationRemove(int id);
     bool GimbalPresetLocationTigger(int id);
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1042</width>
-    <height>555</height>
+    <width>1066</width>
+    <height>606</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -57,7 +57,7 @@ background-color: rgb(0, 0, 0);</string>
    <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout_14">
     <item>
      <widget class="QWidget" name="widget" native="true">
       <property name="layoutDirection">
@@ -70,18 +70,18 @@ background-color: rgb(0, 0, 0);</string>
        <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(0, 0, 0);</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>10</y>
-         <width>1024</width>
-         <height>451</height>
+         <width>1041</width>
+         <height>491</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_16">
         <item>
-         <spacer name="horizontalSpacer_3">
+         <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -117,16 +117,16 @@ background-color: rgb(0, 0, 0);</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <widget class="QWidget" name="layoutWidget">
+          <widget class="QWidget" name="">
            <property name="geometry">
             <rect>
-             <x>10</x>
-             <y>10</y>
-             <width>291</width>
-             <height>441</height>
+             <x>11</x>
+             <y>1</y>
+             <width>288</width>
+             <height>431</height>
             </rect>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_12">
+           <layout class="QVBoxLayout" name="verticalLayout_15">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_12">
               <item>
@@ -146,145 +146,405 @@ background-color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
               </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_20">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <spacer name="horizontalSpacer_13">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
+               <widget class="QLineEdit" name="presetName1">
+                <property name="maximumSize">
                  <size>
-                  <width>40</width>
-                  <height>20</height>
+                  <width>100</width>
+                  <height>16777215</height>
                  </size>
                 </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="presetLocationAddButton">
-                <property name="font">
-                 <font>
-                  <family>仿宋</family>
-                 </font>
-                </property>
                 <property name="styleSheet">
-                 <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(30, 30,30);</string>
-                </property>
-                <property name="text">
-                 <string>添加预置位</string>
+                 <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="presetInfo1">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <item>
+                 <widget class="QPushButton" name="presetLocationAddButton_1">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>添加1</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="presetLocationDel_1">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>删除2</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="preesetLocationEnable_1">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>切换1</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
             <item>
-             <widget class="QListView" name="presetLocationValueList">
-              <property name="styleSheet">
-               <string>color: rgb(255, 255, 255);
-background-color: rgb(47, 47, 47);</string>
+             <spacer name="verticalSpacer_19">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
               </property>
-             </widget>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_11">
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_14">
-                <item>
-                 <widget class="QPushButton" name="pushButton_2">
-                  <property name="minimumSize">
-                   <size>
-                    <width>60</width>
-                    <height>60</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>60</width>
-                    <height>60</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>预置位1</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton_3">
-                  <property name="minimumSize">
-                   <size>
-                    <width>60</width>
-                    <height>60</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>60</width>
-                    <height>60</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>预置位2</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+               <widget class="QLineEdit" name="presetName2">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="presetInfo2">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_15">
                 <item>
-                 <widget class="QPushButton" name="pushButton_5">
-                  <property name="minimumSize">
-                   <size>
-                    <width>60</width>
-                    <height>60</height>
-                   </size>
-                  </property>
+                 <widget class="QPushButton" name="presetLocationAddButton_2">
                   <property name="maximumSize">
                    <size>
                     <width>60</width>
-                    <height>60</height>
+                    <height>200</height>
                    </size>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
                   <property name="text">
-                   <string>预置位3</string>
+                   <string>添加2</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_4">
-                  <property name="minimumSize">
-                   <size>
-                    <width>60</width>
-                    <height>60</height>
-                   </size>
-                  </property>
+                 <widget class="QPushButton" name="presetLocationDel_2">
                   <property name="maximumSize">
                    <size>
                     <width>60</width>
-                    <height>60</height>
+                    <height>200</height>
                    </size>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
                   <property name="text">
-                   <string>预置位4</string>
+                   <string>删除2</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="preesetLocationEnable_2">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>切换2</string>
                   </property>
                  </widget>
                 </item>
                </layout>
               </item>
              </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_12">
+              <item>
+               <widget class="QLineEdit" name="presetName3">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="presetInfo3">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_17">
+                <item>
+                 <widget class="QPushButton" name="presetLocationAddButton_3">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>添加3</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="preesetLocationDel_3">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>删除3</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="presetEnable3">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>切换3</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_10">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <item>
+               <widget class="QLineEdit" name="presetName4">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="presetInfo4">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_19">
+                <item>
+                 <widget class="QPushButton" name="presetLocationAddButton_4">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>添加4</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="preesetLocationDel_4">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>删除4</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="presetEnable4">
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(30, 30, 30);</string>
+                  </property>
+                  <property name="text">
+                   <string>切换4</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
+         <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>20</width>
+            <width>40</width>
             <height>20</height>
            </size>
           </property>
@@ -1725,7 +1985,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1042</width>
+     <width>1066</width>
      <height>25</height>
     </rect>
    </property>
