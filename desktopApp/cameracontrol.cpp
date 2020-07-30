@@ -86,14 +86,14 @@ bool CameraControl::GetLocalIP(){
             IP_ADDR_STRING *pIpAddrString = &(pIpAdapterInfo->IpAddressList);
             do{
                 localIP = pIpAddrString->IpAddress.String;
-                //if (std::strcmp(localIP.c_str(), "0.0.0.0") != 0){
+                if (std::strcmp(localIP.c_str(), "0.0.0.0") != 0){
                     cout << "IP:" << pIpAddrString->IpAddress.String << endl;
                     cout << "netmask:" << pIpAddrString->IpMask.String << endl;
                     cout << "gateway:" << pIpAdapterInfo->GatewayList.IpAddress.String << endl;
 
                     std::cout<<"local ip  is "<<localIP<<std::endl;
                     return true;
-                //}
+                }
                 pIpAddrString = pIpAddrString->Next;
             } while (pIpAddrString);
 

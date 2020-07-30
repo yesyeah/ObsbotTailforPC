@@ -26,8 +26,8 @@
      <rect>
       <x>30</x>
       <y>20</y>
-      <width>72</width>
-      <height>15</height>
+      <width>311</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -43,11 +43,27 @@
       <x>30</x>
       <y>50</y>
       <width>341</width>
-      <height>491</height>
+      <height>461</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(30, 30, 30);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="deviceLabel_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>520</y>
+      <width>311</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(140, 140, 140);</string>
+    </property>
+    <property name="text">
+     <string>搜索设备需一些时间，请耐心等待……</string>
     </property>
    </widget>
   </widget>

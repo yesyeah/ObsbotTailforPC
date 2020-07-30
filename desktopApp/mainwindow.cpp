@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->powerOffButton->setVisible(false);
+    ui->poweroffLabel->setVisible(false);
+    ui->uvcLabel->setVisible(false);
+    ui->uvcButton->setVisible(false);
 
 }
 

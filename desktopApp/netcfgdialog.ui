@@ -25,6 +25,10 @@
      <height>24</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(30, 30, 30);
+color: rgb(255, 255, 255);</string>
+   </property>
    <property name="text">
     <string>确定</string>
    </property>
@@ -39,7 +43,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="wifiPasswordEdit">
@@ -52,7 +57,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
    </property>
   </widget>
   <widget class="QLabel" name="ssidLabel">
@@ -85,6 +91,25 @@
    </property>
    <property name="text">
     <string>WiFi 密码</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>210</y>
+     <width>351</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(140, 140, 140);</string>
+   </property>
+   <property name="text">
+    <string>当设备常亮紫灯时，网络配置完成。请关闭该窗口，使用station模式连接相机</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

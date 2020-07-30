@@ -117,13 +117,13 @@ background-color: rgb(0, 0, 0);</string>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <property name="geometry">
             <rect>
              <x>11</x>
              <y>1</y>
-             <width>288</width>
-             <height>431</height>
+             <width>291</width>
+             <height>481</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -217,7 +217,7 @@ color: rgb(0, 0, 0);</string>
                    <string notr="true">background-color: rgb(30, 30, 30);</string>
                   </property>
                   <property name="text">
-                   <string>删除2</string>
+                   <string>删除1</string>
                   </property>
                  </widget>
                 </item>
@@ -408,7 +408,7 @@ color: rgb(0, 0, 0);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="presetEnable3">
+                 <widget class="QPushButton" name="preesetLocationEnable_3">
                   <property name="maximumSize">
                    <size>
                     <width>60</width>
@@ -501,7 +501,7 @@ color: rgb(0, 0, 0);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="presetEnable4">
+                 <widget class="QPushButton" name="preesetLocationEnable_4">
                   <property name="maximumSize">
                    <size>
                     <width>60</width>
@@ -1179,6 +1179,9 @@ background-color: rgba(255, 255, 255, 0);</string>
               </item>
               <item>
                <widget class="QPushButton" name="powerOffButton">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
                 <property name="minimumSize">
                  <size>
                   <width>40</width>
@@ -1206,6 +1209,9 @@ background-color: rgba(255, 255, 255, 0);</string>
                   <width>30</width>
                   <height>30</height>
                  </size>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>

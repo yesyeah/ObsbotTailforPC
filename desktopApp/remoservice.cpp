@@ -80,42 +80,36 @@ char* RemoService::dataPack(char data, unsigned short command, char receiver){
     unsigned short checkSum = 0;     //crc16
     unsigned char checkBit = 0;      //no use
 
-    //std::bitset<8> syncHead = 0xaa;
     communicationData[0] = 0xaa;
 
-    //std::bitset<4> version = 0;
-    //std::bitset<12> frameLength = frameLen & 0xfff;
     communicationData[1] = 0 < 4 || (frameLen & 0x0f00)>>8;
     communicationData[2] = (frameLen & 0x00ff);
 
-    //std::bitset<8> frameDescrip = 0x12;
     communicationData[3] = 0x12;
 
-    /*std::bitset<16> frameSeq = packSeq & 0xffff;
-    std::bitset<16> frameCheckSum = checkSum & 0xffff;*/
     communicationData[4] = (packSeq & 0xff00) >> 8;
     communicationData[5] = (packSeq & 0x00ff);
-    communicationData[6] = (checkSum & 0xff00) >> 8;
-    communicationData[7] = (checkSum & 0x00ff);
+    communicationData[6] = checkSum;
+    communicationData[7] = checkSum;
 
-    /*std::bitset<8> headCheckBit = checkBit;
-    std::bitset<4> sender = (Terminal::Pc & 0xff) < 4;
-    std::bitset<4> recv =  receiver & 0x0f;
-    std::bitset<4> commandSet = command & 0x0f;
-    std::bitset<12> commandID = description & 0x0fff;*/
-    communicationData[8] = checkBit;                    //pack head checkbit
+    communicationData[8] = checkBit;                                              //pack head checkbit
     communicationData[9] = (Terminal::Pc & 0xff) < 4  || (receiver & 0xff);
-    communicationData[10] = (command & 0xffff0000) > 8;      //command
-    communicationData[11] = command & 0xffff;   //description
+    communicationData[10] = (command & 0xffff0000) > 8;                           //command
+    communicationData[11] = command & 0xffff;                                     //description
 
-    //headCheckBit = CRC16_USB(communicationData, 12) & 0x00ff;
     communicationData[8] = Util::CRC16_USB(communicationData, 12) & 0x00ff;
     checkSum = Util::CRC16_USB(communicationData, 12) & 0xffff;
     communicationData[6] = (checkSum & 0xff00) > 8;
     communicationData[7] = (checkSum & 0x00ff);
 
     packSeq = packSeq + 1;
-    std::cout<<"data after pack is : "<<communicationData<<std::endl;
+
+    std::cout<<"data after pack is : "<<std::endl;
+
+    for (int i = 0; i < 12; i++){
+        std::cout<<hex<<communicationData[i]<<" "<<std::endl;
+    }
+
     return communicationData;
 }
 
@@ -130,7 +124,7 @@ bool RemoService::dataUnPack(char* data, RemoProcotolHead* response){
 }
 
 bool RemoService::request(char command, unsigned short description, char receiver){
-    sockClient = socket(AF_INET, SOCK_DGRAM, 0);
+   /* sockClient = socket(AF_INET, SOCK_DGRAM, 0);
 
     addrClient.sin_addr.S_un.S_addr = inet_addr(REMO_PROCOTOL_ADDRESS);
     addrClient.sin_family = AF_INET;
@@ -150,10 +144,10 @@ bool RemoService::request(char command, unsigned short description, char receive
        std::cout<< recvData<<std::endl;
     }
 
-    closesocket(sockClient);
+    closesocket(sockClient);*/
     WSACleanup();
 
-    delete  sendBuf;
+    //delete  sendBuf;
 }
 
 bool RemoService::receive(){
