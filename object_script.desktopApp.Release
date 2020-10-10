@@ -1,0 +1,17 @@
+release/devicelistwindow.o
+release/httpservice.o
+release/icmp_ping.o
+release/cameracontrol.o
+release/loginwindow.o
+release/main.o
+release/mainwindow.o
+release/netcfgdialog.o
+release/remoservice.o
+release/switchbutton.o
+release/utils.o
+release/qrc_resource.o
+release/moc_devicelistwindow.o
+release/moc_loginwindow.o
+release/moc_mainwindow.o
+release/moc_netcfgdialog.o
+release/moc_switchbutton.o

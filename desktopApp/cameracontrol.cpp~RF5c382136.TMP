@@ -284,19 +284,17 @@ std::vector<std::string> CameraControl::DeviceSearch(){
 
     for (int i = 0; i < 127; i++){
         testIP = preIP + std::to_string(254-i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 18)){
+        if (pingHandle->Ping(testIP.c_str(), &reply, 20)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
-                break;
             }
         }
-        testIP = preIP + std::to_string(2+i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 18)){
+        testIP = preIP + std::to_string(0+i);
+        if (pingHandle->Ping(testIP.c_str(), &reply, 20)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
-                break;
             }
         }
     }

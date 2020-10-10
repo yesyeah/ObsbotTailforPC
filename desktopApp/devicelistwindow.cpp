@@ -35,6 +35,7 @@ bool devicelistwindow::deviceListShow(std::vector<std::string> info_list){
 
     ui->deviceList->setModel(ItemModel);
     ui->deviceList->setFixedWidth(311);
+    ui->deviceList->setStyleSheet("color: white;");
     connect(ui->deviceList, SIGNAL(clicked(QModelIndex)), this, SLOT(connectTodevice(QModelIndex)));
     return true;
 }

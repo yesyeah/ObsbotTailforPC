@@ -105,41 +105,47 @@ bool CameraControl::GetLocalIP(){
         delete pIpAdapterInfo;
     }
     return false;*/
-   WSADATA WSAData;								//WSADATA结构被用来储存调用AfxSocketInit全局函数返回的Windows Sockets初始化信息。
-   if (WSAStartup(MAKEWORD(2, 0),&WSAData))		// 初始化Windows sockets API
-   {
-        printf("WSAStartup failed %s\n", WSAGetLastError());
-       exit(-1);		//异常退出
-    }
-
-   char hostName[256];
-   if(gethostname(hostName,sizeof(hostName)))		//获取主机名
-   {
-       printf("Error: %u\n", WSAGetLastError());
-       exit(-1);
+   vector<string> result;
+   IP_ADAPTER_INFO *pAdpFree=NULL;
+   IP_ADAPTER_INFO *pIpAdpInfo=(IP_ADAPTER_INFO*)malloc(sizeof(IP_ADAPTER_INFO));
+   unsigned long ulBufLen=sizeof(IP_ADAPTER_INFO);
+   int ret;
+   //第一次调用获取需要开辟的内存空间大小
+   if((ret=GetAdaptersInfo(pIpAdpInfo,&ulBufLen))==ERROR_BUFFER_OVERFLOW){
+       free(pIpAdpInfo);
+       //分配实际所需要的内存空间
+       pIpAdpInfo=(IP_ADAPTER_INFO*)malloc(ulBufLen);
+       if(NULL == pIpAdpInfo){
+           return false;
+       }
    }
 
-   hostent *host=gethostbyname(hostName);	// 根据主机名获取主机信息(含IP)
-   if(host==NULL)
-   {
-       printf("Error: %u\n", WSAGetLastError());
-       exit(-1);
+   char ip[256];
+   if((ret=GetAdaptersInfo(pIpAdpInfo,&ulBufLen))==NO_ERROR){
+       pAdpFree=pIpAdpInfo;
+
+       for(int i=0;pIpAdpInfo;i++){
+           string addr;
+           snprintf(ip,sizeof(ip),"netcard%d ip addr:",i);
+           addr+=ip;
+           IP_ADDR_STRING *pIps=&pIpAdpInfo->IpAddressList;
+           while(pIps){
+               snprintf(ip,sizeof(ip),"ip:%s,mask:%s,gate:%s.",pIps->IpAddress.String,
+                        pIps->IpMask.String,pIpAdpInfo->GatewayList.IpAddress.String);
+               addr+=ip;
+               cout<<pIps->IpAddress.String<<endl;
+               cout<<pIps->IpMask.String<<endl;
+               cout<<pIpAdpInfo->GatewayList.IpAddress.String<<endl;
+               pIps=pIps->Next;
+           }
+           result.push_back(addr);
+           pIpAdpInfo=pIpAdpInfo->Next;
+       }
    }
-
-   std::cout<<"host name:        "<<host->h_name<<endl
-        <<"host type:        "<<host->h_addrtype<<endl
-        <<"addr list:            "<<host->h_addr_list<<endl
-        <<"alias list:            "<<host->h_aliases<<endl
-        <<"addr length:            "<<host->h_length<<endl;
-
-   for(int i=0;host->h_addr_list[i]!=0;i++)
-   {
-       localIP = inet_ntoa(*(struct in_addr*)*host->h_addr_list);
-
-       std::cout<<"host ip"<<i+1<<":           "<<localIP<<endl;
+   if(pAdpFree){
+       free(pAdpFree);
    }
-   WSACleanup();
-   return true;
+   return result;
 }
 
 bool CameraControl::isInited(){
@@ -284,19 +290,17 @@ std::vector<std::string> CameraControl::DeviceSearch(){
 
     for (int i = 0; i < 127; i++){
         testIP = preIP + std::to_string(254-i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 18)){
+        if (pingHandle->Ping(testIP.c_str(), &reply, 50)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
-                break;
             }
         }
-        testIP = preIP + std::to_string(2+i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 18)){
+        testIP = preIP + std::to_string(0+i);
+        if (pingHandle->Ping(testIP.c_str(), &reply, 50)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
-                break;
             }
         }
     }

@@ -1,0 +1,17 @@
+debug/devicelistwindow.o
+debug/httpservice.o
+debug/icmp_ping.o
+debug/cameracontrol.o
+debug/loginwindow.o
+debug/main.o
+debug/mainwindow.o
+debug/netcfgdialog.o
+debug/remoservice.o
+debug/switchbutton.o
+debug/utils.o
+debug/qrc_resource.o
+debug/moc_devicelistwindow.o
+debug/moc_loginwindow.o
+debug/moc_mainwindow.o
+debug/moc_netcfgdialog.o
+debug/moc_switchbutton.o

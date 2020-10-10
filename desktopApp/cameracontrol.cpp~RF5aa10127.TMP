@@ -126,17 +126,15 @@ bool CameraControl::GetLocalIP(){
        exit(-1);
    }
 
-   std::cout<<"host name:        "<<host->h_name<<endl
-        <<"host type:        "<<host->h_addrtype<<endl
-        <<"addr list:            "<<host->h_addr_list<<endl
-        <<"alias list:            "<<host->h_aliases<<endl
-        <<"addr length:            "<<host->h_length<<endl;
+   cout<<"正式的主机名:        "<<host->h_name<<endl
+        <<"主机地址类型:        "<<host->h_addrtype<<endl
+        <<"地址清单:            "<<host->h_addr_list<<endl
+        <<"别名列表:            "<<host->h_aliases<<endl
+        <<"地址长度:            "<<host->h_length<<endl;
 
    for(int i=0;host->h_addr_list[i]!=0;i++)
    {
-       localIP = inet_ntoa(*(struct in_addr*)*host->h_addr_list);
-
-       std::cout<<"host ip"<<i+1<<":           "<<localIP<<endl;
+       cout<<"该主机IP"<<i+1<<":           "<<inet_ntoa(*(struct in_addr*)*host->h_addr_list)<<endl;
    }
    WSACleanup();
    return true;
@@ -284,19 +282,17 @@ std::vector<std::string> CameraControl::DeviceSearch(){
 
     for (int i = 0; i < 127; i++){
         testIP = preIP + std::to_string(254-i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 18)){
+        if (pingHandle->Ping(testIP.c_str(), &reply, 50)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
-                break;
             }
         }
-        testIP = preIP + std::to_string(2+i);
-        if (pingHandle->Ping(testIP.c_str(), &reply, 18)){
+        testIP = preIP + std::to_string(0+i);
+        if (pingHandle->Ping(testIP.c_str(), &reply, 50)){
             if (isStatMode(testIP)){
                 addr_list.insert(addr_list.begin(), testIP);
                 std::cout<<testIP<<" is on"<<std::endl;
-                break;
             }
         }
     }

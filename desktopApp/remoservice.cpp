@@ -10,9 +10,10 @@ RemoService::RemoService(){
     packSeq = 0;
     WSADATA wsaData;
     WORD wVersionRequested = MAKEWORD( 2, 2 );
-    int errNo = WSAStartup( wVersionRequested, &wsaData );
+    int errNo = WSAStartup( wVersionRequested, & wsaData );
     if ( errNo != 0 ) {
         std::cout<<"error while create remo service"<<std::endl;
+        return;
     }
 
     if ( LOBYTE( wsaData.wVersion ) != 1 ||
